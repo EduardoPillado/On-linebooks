@@ -7,7 +7,6 @@ Route::get('/', function () {
     return view('inicio');
 });
 
-
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
@@ -26,7 +25,6 @@ Route::get('/perfil', function () {
     }
 })->name('perfil');
 
-
 // Usuario ----------------------------------------------------------------------------------------------------
 
 Route::get('/registro', function () {
@@ -42,7 +40,5 @@ Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('us
 Route::get('/cerrandoSesión', [Usuario_controller::class, 'logout'])->name('usuario.logout');
 
 Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usuario.insertar');
-
-
 
 // ------------------------------------------------------------------------------------------------------------
