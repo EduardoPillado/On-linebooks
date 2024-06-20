@@ -11,6 +11,9 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     {{-- CSS --}}
     <link rel="stylesheet" href="../css/estilo.css?=1">
+    <link rel="stylesheet" href="../css/tablas.css?=1">
+    <link rel="stylesheet" href="../css/formularios.css?=1">
+    <link rel="stylesheet" href="../css/sidebar.css?=1">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
     <!-- jQuery -->
@@ -22,8 +25,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
-<body>
-    <div class="sidebar">
+<body oncopy="return false" onpaste="return false">
+  <div class="sidebar">
     <div class="logo_content">
       <div class="logo">
         <div class="logo_name">Out-linebooks</div>
@@ -55,11 +58,11 @@
       </li>
 
       <li>
-        <a href="#">
+        <a href="{{ route('admin') }}">
           <i class='bx bxs-medal'></i>
-          <span class="links_name">Ratings</span>
+          <span class="links_name">Panel Admin</span>
         </a>
-        <span class="tooltip">Ratings</span>
+        <span class="tooltip">Panel Admin</span>
       </li>
 
       <li>
