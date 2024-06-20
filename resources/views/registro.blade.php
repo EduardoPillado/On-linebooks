@@ -12,7 +12,7 @@
             <label for="password">Correo</label>
             <input type="email" name="correo" id="correo" placeholder="">
           </div>
-          <div class="input-grpioup">
+          <div class="input-group">
             <label for="password">Contraseña</label>
             <input type="password" name="contraseña" id="contraseña" placeholder="">
           </div>
