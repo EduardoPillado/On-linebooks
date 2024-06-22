@@ -25,6 +25,24 @@ Route::get('/perfil', function () {
     }
 })->name('perfil');
 
+Route::get('/favoritos', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return view('favoritos');
+    }
+})->name('favoritos');
+
+Route::get('/categorias', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return view('categorias');
+    }
+})->name('categorias');
+
 // Usuario ----------------------------------------------------------------------------------------------------
 
 Route::get('/registro', function () {
