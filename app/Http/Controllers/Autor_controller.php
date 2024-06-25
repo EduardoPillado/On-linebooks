@@ -27,4 +27,9 @@ class Autor_controller extends Controller
             return back()->with('error', 'Hay algún problema con la información');
         }
     }
+
+    function mostrarAutor(){
+        $datos_autor=Autor::all();
+        return view('tabla_autor',compact('datos_autor'));
+    }
 }

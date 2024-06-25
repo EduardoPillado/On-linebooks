@@ -60,7 +60,7 @@ Route::get('/tabla_generos', function () {
     return view('tabla_generos');
 })->name('tabla_generos');
 
-Route::get('/tablageneros', [Genero_controller::class, 'mostrarGeneros'])->name('mostrar');
+// Route::get('/tablageneros', [Genero_controller::class, 'mostrarGeneros'])->name('mostrar');
 
 
 Route::post('/Insertargenero', [Genero_controller::class, 'insertar'])->name('genero.insertar');
@@ -85,7 +85,7 @@ Route::get('/tabla_autor', function () {
 })->name('tabla_autor');
 
 Route::post('/Insertarautor', [Autor_controller::class, 'insertar'])->name('autor.insertar');
-// Route::get('/generos', [Autor_controller::class, 'mostrarGeneros'])->name('generos.mostrar'); // Descomenta esta línea para que funcione la ruta
+Route::get('/MostrarAutor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar'); // Descomenta esta línea para que funcione la ruta
 
 // Libro
 Route::get('/form_libro', function () {
