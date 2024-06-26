@@ -72,7 +72,7 @@ class Usuario_controller extends Controller
         $hash = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 10]);
         $usuario->contraseña=$hash;
         $usuario->fk_tipo_usuario=2;
-        $usuario->estatusUsuario=1;
+        $usuario->estatus_usuario=1;
 
         $usuario->save();
         

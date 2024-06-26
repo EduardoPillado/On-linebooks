@@ -15,7 +15,7 @@ class Genero extends Model
         'nombre_genero'
     ];
     public $timestamps=false;
-    public function libro_genero(){
-        return $this->hasMany(Libro_genero::class, 'fk_genero');
+    public function libros() {
+        return $this->belongsToMany(Libro::class, 'libro_genero', 'fk_libro', 'fk_genero');
     }
 }
