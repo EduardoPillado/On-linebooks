@@ -20,7 +20,9 @@
                     <td class="my-table-cell">{{ $autor->nombre_autor }}</td>
                     <td class="my-table-cell">
                         <div class="button-container">
-                            <button type="submit" class="button2 btn-danger btn-sm">Editar</button>
+                            <form action="route('autor.editar', $autor->pk_autor)" method="GET" style="display:inline;">
+                                <button type="submit" class="button2 btn-danger btn-sm">Editar</button>
+                            </form>
                             <form action="" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -34,7 +36,6 @@
     </table>
 </div>
 
-
-
+{{ route('autor.eliminar', $autor->pk_autor) }} --}}
 @include('fooder')
 

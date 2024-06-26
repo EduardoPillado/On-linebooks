@@ -86,6 +86,7 @@ Route::get('/tabla_autor', function () {
 
 Route::post('/Insertarautor', [Autor_controller::class, 'insertar'])->name('autor.insertar');
 Route::get('/MostrarAutor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar'); // Descomenta esta línea para que funcione la ruta
+Route::put('/autor/{pkAutor}/update', [Autor_Controller::class, 'actualizar'])->name('autor.actualizar');
 
 // Libro
 Route::get('/form_libro', function () {
