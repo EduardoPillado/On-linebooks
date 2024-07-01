@@ -20,7 +20,9 @@ class Libro_controller extends Controller
             'titulo' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
             'descripcion' => ['required', 'max:1000'],
             'autores' => ['required', 'array'],
-            'autores.*' => ['exists:autores,pk_autor'],
+            'autores.*' => ['exists:autor,pk_autor'],
+            'generos' => ['required', 'array'],
+            'generos.*' => ['exists:genero,pk_genero'],
             'año_publicacion' => ['required', 'digits:4', 'integer', 'min:1000', 'max:' . date('Y')],
             'imagen_portada' => ['nullable', 'image'],
             'pdf_ruta' => ['required', 'mimes:pdf'],
@@ -34,6 +36,9 @@ class Libro_controller extends Controller
 
             'autores.required' => 'Debe seleccionar al menos un autor.',
             'autores.*.exists' => 'El autor seleccionado no es válido.',
+
+            'generos.required' => 'Debe seleccionar al menos un género.',
+            'generos.*.exists' => 'El género seleccionado no es válido.',
             
             'año_publicacion.required' => 'El año de publicación es obligatorio.',
             'año_publicacion.digits' => 'El año de publicación debe tener 4 dígitos.',
@@ -62,30 +67,32 @@ class Libro_controller extends Controller
             $path = $pdf->store('libros', 'public');
             $libro->pdf_ruta = $path;
             $libro->estatus_libro = 1;
+            $autoresSeleccionados = $req->input('autores', []);
+            $generosSeleccionados = $req->input('generos', []);
     
             $libro->save();
     
-            $libro->autores()->attach($req->autores);
-            $libro->generos()->attach($req->generos);
+            $libro->autores()->attach($autoresSeleccionados);
+            $libro->generos()->attach($generosSeleccionados);
             
-            return redirect('/')->with('success', 'Libro agregado');
+            return back()->with('success', 'Libro agregado');
         } else {
             return back()->with('warning', 'Debe agregar el PDF del libro.');
         }
     }
 
     public function mostrar(){
-        $PKUSUARIO = session('pk_usuario');
-        if ($PKUSUARIO) {
-            $tipo_usuario = session('tipo_usuario');
-            if ($tipo_usuario == 1) {
+        // $PKUSUARIO = session('pk_usuario');
+        // if ($PKUSUARIO) {
+        //     $tipo_usuario = session('tipo_usuario');
+        //     if ($tipo_usuario == 1) {
                 $datos_libro=Libro::where('estatus_libro', '=', 1)->get();
-                return view('tabla_libros', compact('datos_libro'));
-            } else {
-                return redirect('/');
-            }
-        } else {
-            return redirect('/');
-        }
+                return view('inicio', compact('datos_libro'));
+        //     } else {
+        //         return redirect('/');
+        //     }
+        // } else {
+        //     return redirect('/');
+        // }
     }
 }

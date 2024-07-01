@@ -15,7 +15,7 @@ class Autor extends Model
         'nombre_autor'
     ];
     public $timestamps=false;
-    public function libros() {
-        return $this->belongsToMany(Libro::class, 'libro_autor', 'fk_libro', 'fk_autor');
+    public function libros(){
+        return $this->belongsToMany(Libro::class, 'libro_autor', 'fk_autor', 'fk_libro');
     }
 }

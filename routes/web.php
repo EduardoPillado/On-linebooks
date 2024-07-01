@@ -1,12 +1,13 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Usuario_controller; // Asegúrate de usar PascalCase para los nombres de las clases
-use App\Http\Controllers\Genero_controller;  // Asegúrate de usar PascalCase para los nombres de las clases
-use App\Http\Controllers\Autor_controller;  // Asegúrate de usar PascalCase para los nombres de las clases
+use App\Http\Controllers\Usuario_controller;
+use App\Http\Controllers\Libro_controller;
+use App\Http\Controllers\Autor_controller;
+use App\Http\Controllers\Genero_controller;
 
 Route::get('/', function () {
     return view('inicio');
-});
+})->name('inicio');
 
 // Perfil
 Route::get('/perfil', function () {
@@ -38,6 +39,20 @@ Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('us
 Route::get('/cerrandoSesión', [Usuario_controller::class, 'logout'])->name('usuario.logout');
 Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usuario.insertar');
 
+// ------------------------------------------------------------------------------------------------------------
+
+// Libro ------------------------------------------------------------------------------------------------------
+
+Route::get('/libro', function () {
+    return view('info_libro');
+})->name('libro');
+
+Route::get('/agg_libro', [Libro_controller::class, 'libro_opciones'])->name('agg_libro');
+Route::post('/agregando_libro', [Libro_controller::class, 'insertar'])->name('libro.insertar');
+Route::get('/', [Libro_controller::class, 'mostrar'])->name('libro.mostrar');
+
+// ------------------------------------------------------------------------------------------------------------
+
 // Admin
 Route::get('/admin', function () {
     return view('panel_admin');
@@ -64,7 +79,7 @@ Route::get('/tabla_generos', function () {
 
 
 Route::post('/Insertargenero', [Genero_controller::class, 'insertar'])->name('genero.insertar');
-Route::get('/generos', [Genero_controller::class, 'mostrarGeneros'])->name('generos.mostrar'); // Descomenta esta línea para que funcione la ruta
+Route::get('/generos', [Genero_controller::class, 'mostrarGeneros'])->name('generos.mostrar');
 
 
 //Autor
@@ -85,17 +100,5 @@ Route::get('/tabla_autor', function () {
 })->name('tabla_autor');
 
 Route::post('/Insertarautor', [Autor_controller::class, 'insertar'])->name('autor.insertar');
-Route::get('/MostrarAutor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar'); // Descomenta esta línea para que funcione la ruta
-Route::put('/autor/{pkAutor}/update', [Autor_Controller::class, 'actualizar'])->name('autor.actualizar');
-
-// Libro
-Route::get('/form_libro', function () {
-    $PK_USUARIO = session('pk_usuario');
-    if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'No eres admin bro');
-    }
-    return view('form_libro');
-})->name('form_libro');
-?>
- 
-  
+Route::get('/MostrarAutor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar');
+Route::put('/autor/{pkAutor}/update', [Autor_controller::class, 'actualizar'])->name('autor.actualizar');
