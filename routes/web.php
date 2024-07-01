@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usuario_controller;
+use App\Http\Controllers\Genero_controller;
+use App\Http\Controllers\Libro_controller;
+use App\Http\Controllers\Favorito_controller;
+use App\Models\Favorito;
 
 Route::get('/', function () {
     return view('inicio');
@@ -34,14 +38,26 @@ Route::get('/favoritos', function () {
     }
 })->name('favoritos');
 
+//ruta con la funcion del controlador de mostrar informacion, y el acceso de usuario en uno
 Route::get('/categorias', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
         return redirect()->back()->with('warning', 'Inicia sesion para acceder');
     } else {
-        return view('categorias');
+        return app(Genero_controller::class)->mostrar();
     }
 })->name('categorias');
+
+Route::get('/libro_cat/{categoria}', [Libro_controller::class, 'mostrar'])->name('libro_cat');
+
+Route::get('/favoritos', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return app(Favorito_controller::class)->mostrar();
+    }
+})->name('favoritos');
 
 // Usuario ----------------------------------------------------------------------------------------------------
 

@@ -7,7 +7,7 @@
     <div class="card__subtitle">Correo</div>
     <div class="card__wrapper">
         <button class="card__btn">Button</button>
-        <button class="card__btn card__btn-solid">Button</button>
+        <button class="card__btn card__btn-solid">Favoritos</button>
     </div>
 </div>
 

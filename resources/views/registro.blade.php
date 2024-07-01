@@ -1,24 +1,25 @@
     @include('sidebar')
-    
+    <body oncopy="return false" onpaste="return false">
+      
     <div class="form-container">
         <p class="title">Registro</p>
         <form class="form" id="form-register" action="{{ route('usuario.insertar') }}" method="post">
             @csrf
             <div class="input-group">
             <label for="username">Nombre de usuario</label>
-            <input type="text" name="nombre_usuario" id="username" placeholder="">
+            <input autocomplete="off" type="text" name="nombre_usuario" id="username" placeholder="Ingresa tu nombre de usuario">
           </div>
           <div class="input-group">
             <label for="password">Correo</label>
-            <input type="email" name="correo" id="correo" placeholder="">
+            <input autocomplete="off" type="email" name="correo" id="correo" placeholder="Ingresa tu correo electronico">
           </div>
           <div class="input-group">
             <label for="password">Contraseña</label>
-            <input type="password" name="contraseña" id="contraseña" placeholder="">
+            <input type="password" name="contraseña" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
           </div>
           <div class="input-group">
             <label for="password">Comfirmar contraseña</label>
-            <input type="password" name="conf_contraseña" id="conf_contraseña" placeholder="">
+            <input type="password" name="conf_contraseña" id="conf_contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
           </div>
           <button class="sign">Registrate</button>
 
@@ -114,4 +115,5 @@
         <p class="signup">¿Ya tienes una cuenta con nosotros?, <a href="{{ route('login') }}">inicia sesión aquí</a>.</p>
       </div>
 
+      </body>
       @include('fooder')

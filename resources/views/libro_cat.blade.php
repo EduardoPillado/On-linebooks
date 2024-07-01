@@ -1,6 +1,6 @@
 @include('sidebar')
 
-<h1>Favoritos</h1>
+<h1>Categoría</h1>
 <div class="contenedor">
 
 @foreach ($datos_libro as $dato)
