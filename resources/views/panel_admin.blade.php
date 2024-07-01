@@ -80,7 +80,7 @@
             <p class="card-description">Lorem ipsum dolor sit amet, consectetur adi</p>
         </div>
         <div class="card-button-wrapper">
-            <a href="{{ route('mostrar') }}" class="card-button secondary">Panel</a>
+            <a href="{{ route('genero.mostrar') }}" class="card-button secondary">Panel</a>
             <a href="{{ route('form_generos') }}" class="card-button primary">Registrar</a>
         </div>
     </div>
@@ -90,7 +90,7 @@
             <p class="card-description">Lorem ipsum dolor sit amet, consectetur adi</p>
         </div>
         <div class="card-button-wrapper">
-            <a href="{{ route('tabla_autor') }}" class="card-button secondary">Panel</a>
+            <a href="{{ route('autor.mostrar') }}" class="card-button secondary">Panel</a>
             <a href="{{ route('form_autor') }}" class="card-button primary">Registrar</a>
         </div>
     </div>
