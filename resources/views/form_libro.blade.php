@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Agregar libro</title>
-</head>
+</head>cc
 <body>
 
   @include('sidebar')
 
   <div class="form-container-large">
       <p class="title">Libro</p>
-      <form class="form" id="form-register" action="" method="post" enctype="multipart/form-data">
+      <form class="form" id="form-register" action="{{ route('libro.insertar') }}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="input-group">
               <label for="titulo_libro">Título del libro</label>
@@ -24,19 +24,15 @@
           </div>
           <div class="input-group">
               <label for="año_publicacion">Año de publicación</label>
-              <input type="date" name="año_publicacion" id="año_publicacion" placeholder="Selecciona el año de publicación">
-          </div>
-          <div class="input-group">
-              <label for="año_publicacion">Año de publicación</label>
-              <input type="date" name="año_publicacion" id="año_publicacion" placeholder="Selecciona el año de publicación">
+              <input type="number" name="año_publicacion" id="año_publicacion" placeholder="Ingresa el año de publicación">
           </div>
           <div class="input-group">
               <label for="imagen_portada">Imagen portada</label>
-              <input type="file" name="imagen_portada" id="imagen_portada" placeholder="Selecciona la imagen de portada">
+              <input type="file" name="imagen_portada" id="imagen_portada" placeholder="Ingresa la imagen de portada">
           </div>
           <div class="input-group">
               <label for="ruta_pdf">Ruta del PDF</label>
-              <input type="file" name="ruta_pdf" id="ruta_pdf" placeholder="Selecciona el archivo PDF">
+              <input type="file" name="ruta_pdf" id="ruta_pdf" placeholder="Ingresa el archivo PDF">
           </div>
           <div class="input-group">
               <label for="generos">Genero</label>
