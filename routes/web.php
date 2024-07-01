@@ -9,7 +9,8 @@ Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
-// Perfil
+// Perfil ----------------------------------------------------------------------------------------------------
+
 Route::get('/perfil', function () {
     $PK_USUARIO = session('pk_usuario');
     if (!$PK_USUARIO) {
@@ -18,7 +19,9 @@ Route::get('/perfil', function () {
     return view('perfil');
 })->name('perfil');
 
-// Usuario
+// ------------------------------------------------------------------------------------------------------------
+
+// Usuario ----------------------------------------------------------------------------------------------------
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
@@ -53,12 +56,16 @@ Route::get('/', [Libro_controller::class, 'mostrar'])->name('libro.mostrar');
 
 // ------------------------------------------------------------------------------------------------------------
 
-// Admin
+// Admin ------------------------------------------------------------------------------------------------------
+
 Route::get('/admin', function () {
     return view('panel_admin');
 })->name('admin');
 
-// Generos
+// ------------------------------------------------------------------------------------------------------------
+
+// Generos ----------------------------------------------------------------------------------------------------
+
 Route::get('/form_generos', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
@@ -81,8 +88,10 @@ Route::get('/tabla_generos', function () {
 Route::post('/Insertargenero', [Genero_controller::class, 'insertar'])->name('genero.insertar');
 Route::get('/generos', [Genero_controller::class, 'mostrarGeneros'])->name('generos.mostrar');
 
+// ------------------------------------------------------------------------------------------------------------
 
-//Autor
+//Autor -------------------------------------------------------------------------------------------------------
+
 Route::get('/form_autor', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
@@ -102,3 +111,5 @@ Route::get('/tabla_autor', function () {
 Route::post('/Insertarautor', [Autor_controller::class, 'insertar'])->name('autor.insertar');
 Route::get('/MostrarAutor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar');
 Route::put('/autor/{pkAutor}/update', [Autor_controller::class, 'actualizar'])->name('autor.actualizar');
+
+// ------------------------------------------------------------------------------------------------------------

@@ -72,12 +72,13 @@ class Usuario_controller extends Controller
         $hash = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 10]);
         $usuario->contraseña=$hash;
         $usuario->fk_tipo_usuario=2;
+        $usuario->token = md5($usuario->correo);
         $usuario->estatus_usuario=1;
 
         $usuario->save();
         
         if ($usuario->pk_usuario) {
-            return redirect('/')->with('success', 'Registro exitoso');
+            return redirect('/login')->with('success', 'Registro exitoso');
         } else {
             return back()->with('error', 'Hay algún problema con la información');
         }
