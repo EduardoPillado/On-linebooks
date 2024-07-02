@@ -1,21 +1,23 @@
 @include('sidebar')
 
 <div class="form-container">
-    <p class="title">Autor</p>
-    <form class="form" id="form-register" action="{{ route('autor.insertar') }}" method="post">
+    <p class="title">Editar Autor</p>
+    <form class="form" id="form-update" action="{{ route('autor.actualizar', $datosAutor->pk_autor) }}" method="post">
         @csrf
+        @method('PUT') {{-- Usamos PUT para enviar una solicitud PUT --}}
         <div class="input-group">
-            <label for="nombre_genero">Nombre del autor</label>
-            <input type="text" name="nombre_autor" id="nombre_autor" placeholder="Ingresa el nuevo autor">
+            <label for="nombre_autor">Nombre del autor</label>
+            <input type="text" name="nombre_autor" id="nombre_autor" value="{{ $datosAutor->nombre_autor }}" placeholder="Ingresa el nuevo nombre del autor">
         </div>
-        <button type="submit" class="sign">Registrar</button>
+        <button type="submit" class="sign">Actualizar</button>
     </form>
+    
 </div>
 
 @include('fooder')
 
 <script>
-    document.getElementById('form-register').addEventListener('submit', function(event) {
+    document.getElementById('form-update').addEventListener('submit', function(event) {
         var nombreAutor = document.getElementById('nombre_autor').value;
 
         if (!nombreAutor) {
