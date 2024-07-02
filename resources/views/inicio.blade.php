@@ -11,7 +11,7 @@
     @include('sidebar')
 
     @php
-        $tipo_usuario = session('tipo_usuario');
+        $tipo_usuario = session('fk_tipo_usuario');
     @endphp
 
     @foreach ( $datos_libro as $dato )
@@ -52,7 +52,7 @@
                 </a> --}}
             </div>
             
-            {{-- @if($tipo_usuario == 'Administrador')
+            @if($tipo_usuario == '1')
                 <div>
                     <div>
                         <a href="{{ route('libro.mostrar_por_id', $dato->pk_libro) }}">
@@ -66,11 +66,11 @@
                         </a>
                     </div>
                 </div>
-            @endif --}}
+            @endif
         </div>
     @endforeach
 
-    {{-- <script>
+    <script>
         function confirmarBaja(event) {
             event.preventDefault();
 
@@ -91,7 +91,7 @@
                 });
             }
         }
-    </script> --}}
+    </script>
     
 </body>
 </html>

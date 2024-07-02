@@ -53,6 +53,9 @@ Route::get('/libro', function () {
 Route::get('/agg_libro', [Libro_controller::class, 'libro_opciones'])->name('agg_libro');
 Route::post('/agregando_libro', [Libro_controller::class, 'insertar'])->name('libro.insertar');
 Route::get('/', [Libro_controller::class, 'mostrar'])->name('libro.mostrar');
+Route::get('/libro/{pk_libro}/editar', [Libro_controller::class, 'mostrar_por_id'])->name('libro.mostrar_por_id');
+Route::put('/libro/{pk_libro}/actualizando', [Libro_controller::class, 'actualizar'])->name('libro.actualizar');
+Route::delete('/libro/{pk_libro}', [Libro_controller::class, 'baja'])->name('libro.baja');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -62,10 +65,12 @@ Route::get('/admin', function () {
     return view('panel_admin');
 })->name('admin');
 
-// Generos
+// ------------------------------------------------------------------------------------------------------------
+
+// Generos ----------------------------------------------------------------------------------------------------
 
 Route::get('/form_generos', function () {
-    $PK_USUARIO = session('pk_usuario');
+    // $PK_USUARIO = session('pk_usuario');
     // if ($PK_USUARIO) {
     //     return redirect()->back()->with('warning', 'No eres admin bro');
     // }
@@ -76,20 +81,16 @@ Route::get('/tabla_generos', function () {
     return view('tabla_generos');
 })->name('tabla_generos');
 
-// Ruta para mostrar los géneros
 Route::get('/MostrarGenero', [Genero_controller::class, 'mostrarGenero'])->name('genero.mostrar');
-
-// Guardar formulario de creación
 Route::post('/InsertarGenero', [Genero_controller::class, 'insertar'])->name('genero.insertar');
-// Mostrar formulario de edición
 Route::get('/genero/{pkGenero}/editar', [Genero_controller::class, 'mostrarFormularioEdicion'])->name('genero.mostrarFormularioEdicion');
-// Actualizar
 Route::put('/genero/{pkGenero}', [Genero_controller::class, 'actualizar'])->name('genero.actualizar');
-// Eliminar registro
 Route::delete('/genero/{pkGenero}', [Genero_controller::class, 'eliminar'])->name('genero.eliminar');
 
+// ------------------------------------------------------------------------------------------------------------
 
-// Autor
+// Autor ------------------------------------------------------------------------------------------------------
+
 Route::get('/form_autor', function () {
     // $PK_USUARIO = session('pk_usuario');
     // if (!$PK_USUARIO) {
@@ -100,13 +101,9 @@ Route::get('/form_autor', function () {
 
 Route::get('/tabla_autor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar');
 
-// Guardar formulario de creación
 Route::post('/Insertarautor', [Autor_controller::class, 'insertar'])->name('autor.insertar');
-// Mostrar formulario de edición
 Route::get('/autor/{pkAutor}/editar', [Autor_controller::class, 'mostrarFormularioEdicion'])->name('autor.mostrarFormularioEdicion');
-// Actualizar
 Route::put('/autor/{pkAutor}', [Autor_controller::class, 'actualizar'])->name('autor.actualizar');
-// Eliminar registro
 Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------
