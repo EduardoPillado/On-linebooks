@@ -36,12 +36,14 @@
     </div>
 
     <ul class="nav_list">
-      <li>
-        <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search here">
-        <span class="tooltip">Search</span>
-      </li>
 
+      <li>
+        <a href="{{ url('/') }}">
+          <i class='bx bxs-home'></i>
+          <span class="links_name">Inicio</span>
+        </a>
+        <span class="tooltip">Inicio</span>
+      </li>
       <li>
         <a href="{{ route('perfil') }}">
           <i class='bx bx-user-circle'></i>
