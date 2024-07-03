@@ -1,7 +1,7 @@
 @include('sidebar')
 
 <div class="form-container">
-    <p class="title">Editar Genero</p>
+    <p class="title">Editar Género</p>
     <form class="form" id="form-register" action="{{ route('genero.actualizar', $datosGenero->pk_genero   ) }}" method="post">
         @csrf
         @method('PUT') {{-- Usamos PUT para enviar una solicitud PUT --}}

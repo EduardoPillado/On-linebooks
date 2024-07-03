@@ -1,7 +1,7 @@
 @include('sidebar')
 
 <div class="form-container">
-    <p class="title">Generos</p>
+    <p class="title">Géneros</p>
     <form class="form" id="form-register" action="{{ route('genero.insertar') }}" method="post">
         @csrf
         <div class="input-group">

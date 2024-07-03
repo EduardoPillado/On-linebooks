@@ -76,8 +76,8 @@
 <div class="container">
     <div class="card">
         <div class="card-content">
-            <p class="card-heading">Generos</p>
-            <p class="card-description">Lorem ipsum dolor sit amet, consectetur adi</p>
+            <p class="card-heading">Géneros</p>
+            <p class="card-description">Gestiona y agrega géneros literarios</p>
         </div>
         <div class="card-button-wrapper">
             <a href="{{ route('genero.mostrar') }}" class="card-button secondary">Panel</a>
@@ -87,7 +87,7 @@
     <div class="card">
         <div class="card-content">
             <p class="card-heading">Autores</p>
-            <p class="card-description">Lorem ipsum dolor sit amet, consectetur adi</p>
+            <p class="card-description">Gestiona y agrega autores de libros</p>
         </div>
         <div class="card-button-wrapper">
             <a href="{{ route('autor.mostrar') }}" class="card-button secondary">Panel</a>
@@ -97,10 +97,10 @@
     <div class="card">
         <div class="card-content">
             <p class="card-heading">Libros</p>
-            <p class="card-description">Lorem ipsum dolor sit amet, consectetur adi</p>
+            <p class="card-description">Gestiona y agrega libros en On-linebooks</p>
         </div>
         <div class="card-button-wrapper">
-            <a href="your-panel-url" class="card-button secondary">Panel</a>
+            <a href="{{ url('/') }}" class="card-button secondary">Panel</a>
             <a href="{{ route('agg_libro') }}" class="card-button primary">Registrar</a>
         </div>
     </div>

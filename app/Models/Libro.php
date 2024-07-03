@@ -37,8 +37,4 @@ class Libro extends Model
     public function historial_descarga(){
         return $this->hasMany(Historial_descarga::class, 'fk_libro');
     }
-    public function generos()
-    {
-        return $this->belongsToMany(Genero::class, 'libro_genero', 'fk_libro', 'fk_genero');
-    }
 }

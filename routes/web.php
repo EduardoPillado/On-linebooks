@@ -2,24 +2,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usuario_controller;
 use App\Http\Controllers\Favorito_controller;
-use App\Models\Favorito;
+use App\Http\Controllers\Genero_controller;
 use App\Http\Controllers\Libro_controller;
 use App\Http\Controllers\Autor_controller;
-use App\Http\Controllers\Genero_controller;
 
 Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
-
-// Perfil ----------------------------------------------------------------------------------------------------
-
-Route::get('/perfil', function () {
-    // $PK_USUARIO = session('pk_usuario');
-    // if (!$PK_USUARIO) {
-    //     return redirect()->back()->with('warning', 'Inicia sesión para acceder');
-    // }
-    return view('perfil');
-})->name('perfil');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -29,13 +18,13 @@ Route::get('/perfil', function () {
 Route::get('/categorias', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
-    } else {
         return app(Genero_controller::class)->mostrar();
+    } else {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
     }
 })->name('categorias');
 
-Route::get('/libro_cat/{categoria}', [Libro_controller::class, 'mostrar'])->name('libro_cat');
+Route::get('/libro_cat/{categoria}', [Libro_controller::class, 'mostrar_por_categoria'])->name('libro_cat');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -44,18 +33,9 @@ Route::get('/libro_cat/{categoria}', [Libro_controller::class, 'mostrar'])->name
 Route::get('/favoritos', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
-    } else {
         return app(Favorito_controller::class)->mostrar();
-    }
-})->name('favoritos');
-
-Route::get('/favoritos', function () {
-    $PK_USUARIO = session('pk_usuario');
-    if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
     } else {
-        return view('favoritos');
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
     }
 })->name('favoritos');
 
@@ -74,9 +54,10 @@ Route::get('/login', function () {
 Route::get('/perfil', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+        // return view('perfil');
+        return redirect()->back()->with('warning', 'SECCIÓN EN DESARROLLO');
     } else {
-        return view('perfil');
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
     }
 })->name('perfil');
 
@@ -84,8 +65,9 @@ Route::get('/registro', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
         return redirect()->back()->with('warning', 'Cierra sesión para acceder');
+    } else {
+        return view('registro');
     }
-    return view('registro');
 })->name('registro');
 
 Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('usuario.login');
@@ -95,10 +77,6 @@ Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usua
 // ------------------------------------------------------------------------------------------------------------
 
 // Libro ------------------------------------------------------------------------------------------------------
-
-Route::get('/libro', function () {
-    return view('info_libro');
-})->name('libro');
 
 Route::get('/agg_libro', [Libro_controller::class, 'libro_opciones'])->name('agg_libro');
 Route::post('/agregando_libro', [Libro_controller::class, 'insertar'])->name('libro.insertar');
@@ -114,7 +92,12 @@ Route::match(['get', 'put'], '/libro/{pk_libro}', [Libro_controller::class, 'baj
 // Admin ------------------------------------------------------------------------------------------------------
 
 Route::get('/admin', function () {
-    return view('panel_admin');
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return view('panel_admin');
+    } else {
+        return redirect()->back()->with('warning', 'No puedes acceder');
+    }
 })->name('admin');
 
 // ------------------------------------------------------------------------------------------------------------
@@ -122,15 +105,21 @@ Route::get('/admin', function () {
 // Generos ----------------------------------------------------------------------------------------------------
 
 Route::get('/form_generos', function () {
-    // $PK_USUARIO = session('pk_usuario');
-    // if ($PK_USUARIO) {
-    //     return redirect()->back()->with('warning', 'No eres admin bro');
-    // }
-    return view('form_generos');
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return view('form_generos');
+    } else {
+        return redirect()->back()->with('warning', 'No puedes acceder');
+    }
 })->name('form_generos');
 
 Route::get('/tabla_generos', function () {
-    return view('tabla_generos');
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return view('tabla_generos');
+    } else {
+        return redirect()->back()->with('warning', 'No puedes acceder');
+    }
 })->name('tabla_generos');
 
 Route::get('/MostrarGenero', [Genero_controller::class, 'mostrarGenero'])->name('genero.mostrar');
@@ -144,11 +133,12 @@ Route::delete('/genero/{pkGenero}', [Genero_controller::class, 'eliminar'])->nam
 // Autor ------------------------------------------------------------------------------------------------------
 
 Route::get('/form_autor', function () {
-    // $PK_USUARIO = session('pk_usuario');
-    // if (!$PK_USUARIO) {
-    //     return redirect()->back()->with('warning', 'No eres admin bro');
-    // }
-    return view('form_autor');
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return view('form_autor');
+    } else {
+        return redirect()->back()->with('warning', 'No puedes acceder');
+    }
 })->name('form_autor');
 
 Route::get('/tabla_autor', [Autor_controller::class, 'mostrarAutor'])->name('autor.mostrar');

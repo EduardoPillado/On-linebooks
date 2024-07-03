@@ -4,7 +4,7 @@
     <table class="my-responsive-table">
         <thead>
             <tr>
-                <th class="my-table-header">Nombre de genero</th>
+                <th class="my-table-header">Nombre de género</th>
                 <th class="my-table-header">Acciones</th>
             </tr>
         </thead>
