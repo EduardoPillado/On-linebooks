@@ -13,7 +13,7 @@
             <label for="password">Contraseña</label>
             <input type="password" name="contraseña" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
           </div>
-          <button class="sign">Registrate</button>
+          <button class="sign">Iniciar sesión</button>
 
           @if($errors->any())
           @foreach($errors->all() as $error)
@@ -104,7 +104,7 @@
             </svg>
           </button>
         </div>
-        <p class="signup">¿Aun no tienes una cuenta con nosotros?, <a href="{{ route('registro') }}">Inicia sesión aquí</a>.</p>
+        <p class="signup">¿Aun no tienes una cuenta con nosotros?, <a href="{{ route('registro') }}">Registrate aquí</a>.</p>
       </div>
 
       @include('fooder')

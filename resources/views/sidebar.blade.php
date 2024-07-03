@@ -26,7 +26,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
-<body oncopy="return false" onpaste="return false">
+<body>
+
+  @php
+    $PK_USUARIO = session('pk_usuario');
+    $tipo_usuario = session('nombre_tipo_usuario');
+  @endphp
+
   <div class="sidebar">
     <div class="logo_content">
       <div class="logo">
@@ -49,24 +55,36 @@
           <i class='bx bx-user-circle'></i>
         <span class="links_name">Perfil</span>
         </a>
-        <span class="tooltip">Dashboard</span>
+        <span class="tooltip">Perfil</span>
       </li>
 
-      <li>
-        <a href="{{ route('login') }}">
-          <i class='bx bx-user-plus'></i>
-          <span class="links_name">Inicio de sesión</span>
-        </a>
-        <span class="tooltip">Sesión</span>
-      </li>
+      @if ($PK_USUARIO)
+        <li>
+          <a href="{{ route('usuario.logout') }}">
+            <i class='bx bx-user-minus'></i>
+            <span class="links_name">Cerrar sesión</span>
+          </a>
+          <span class="tooltip">Sesión</span>
+        </li>
+      @else
+        <li>
+          <a href="{{ route('login') }}">
+            <i class='bx bx-user-plus'></i>
+            <span class="links_name">Inicio de sesión</span>
+          </a>
+          <span class="tooltip">Sesión</span>
+        </li>
+      @endif
 
-      <li>
-        <a href="{{ route('admin') }}">
-          <i class='bx bxs-medal'></i>
-          <span class="links_name">Panel Admin</span>
-        </a>
-        <span class="tooltip">Panel Admin</span>
-      </li>
+      @if ($tipo_usuario == 'Administrador')
+        <li>
+          <a href="{{ route('admin') }}">
+            <i class='bx bxs-medal'></i>
+            <span class="links_name">Panel Admin</span>
+          </a>
+          <span class="tooltip">Panel Admin</span>
+        </li>
+      @endif
 
       <li>
         <a href="{{ route('categorias') }}">
@@ -84,29 +102,29 @@
         <span class="tooltip">Favoritos</span>
       </li>
 
-      <li>
+      {{-- <li>
         <a href="#">
           <i class='bx bxs-bell-ring'></i>
           <span class="links_name">Notifications</span>
         </a>
         <span class="tooltip">Notifications</span>
-      </li>
+      </li> --}}
 
-      <li>
+      {{-- <li>
         <a href="#">
           <i class='bx bxl-twitter'></i>
           <span class="links_name">Social</span>
         </a>
         <span class="tooltip">Social</span>
-      </li>
+      </li> --}}
 
-      <li>
+      {{-- <li>
         <a href="#">
           <i class='bx bxs-paper-plane'></i>
           <span class="links_name">Mail</span>
         </a>
         <span class="tooltip">Mail</span>
-      </li>
+      </li> --}}
     </ul>
   </div>
 

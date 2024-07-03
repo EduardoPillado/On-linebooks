@@ -8,11 +8,9 @@ use App\Models\Libro;
 use App\Models\Autor;
 use App\Models\Genero;
 
-use App\Models\Genero;
-
 class Libro_controller extends Controller
 {
-    function mostrar($categoria){
+    function mostrar_por_categoria($categoria){
         // Buscar el ID del género por su nombre
         $genero = Genero::where('nombre_genero', $categoria)->first();
     
@@ -103,13 +101,8 @@ class Libro_controller extends Controller
     }
 
     public function mostrar(){
-        $PK_USUARIO = session('pk_usuario');
-        if ($PK_USUARIO) {
-            $datos_libro=Libro::where('estatus_libro', '=', 1)->get();
-            return view('inicio', compact('datos_libro'));
-        } else {
-            return redirect('/login');
-        }
+        $datos_libro=Libro::where('estatus_libro', '=', 1)->get();
+        return view('inicio', compact('datos_libro'));
     }
 
     public function baja($pk_libro){

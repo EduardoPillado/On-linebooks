@@ -92,7 +92,7 @@
         </form>
         <div class="social-message">
           <div class="line"></div>
-          <p class="message">Login with social accounts</p>
+          <p class="message">Iniciar con estas redes</p>
           <div class="line"></div>
         </div>
         <div class="social-icons">
