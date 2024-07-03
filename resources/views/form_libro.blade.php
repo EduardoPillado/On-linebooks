@@ -57,31 +57,6 @@
   @include('fooder')
 
   <script>
-    //   document.getElementById('form-register').addEventListener('submit', function(event) {
-    //       var titulo = document.getElementById('titulo').value;
-    //       var descripcion = document.getElementById('descripcion').value;
-    //       var añoPublicacion = document.getElementById('año_publicacion').value;
-    //       var imagenPortada = document.getElementById('imagen_portada').files.length;
-    //       var pdfRuta = document.getElementById('pdf_ruta').files.length;
-
-    //       if (!titulo) {
-    //           event.preventDefault();
-    //           showErrorToast('El título del libro es requerido.');
-    //       } else if (!descripcion) {
-    //           event.preventDefault();
-    //           showErrorToast('La descripción es requerida.');
-    //       } else if (!añoPublicacion) {
-    //           event.preventDefault();
-    //           showErrorToast('El año de publicación es requerido.');
-    //       } else if (imagenPortada === 0) {
-    //           event.preventDefault();
-    //           showErrorToast('La imagen de portada es requerida.');
-    //       } else if (pdfRuta === 0) {
-    //           event.preventDefault();
-    //           showErrorToast('La ruta del PDF es requerida.');
-    //       }
-    //   });
-
       function showErrorToast(message) {
           Swal.fire({
               title: message,

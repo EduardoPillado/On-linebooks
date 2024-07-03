@@ -65,7 +65,7 @@
     @include('sidebar')
 
     @php
-        $tipo_usuario = session('fk_tipo_usuario');
+        $tipo_usuario = session('nombre_tipo_usuario');
     @endphp
 
     @foreach ( $datos_libro as $dato )
@@ -98,15 +98,14 @@
                         {{ $loop->first ? '' : ', ' }}{{ $genero->nombre_genero }}
                     @endforeach
                 </p>
-                {{-- <a href="{{ route('libro.leer') }}">
+                <a href="{{ route('libro.leer', $dato->pk_libro) }}" target="_blank">
                     Leer
                 </a>
-                <a href="{{ route('libro.descargar') }}">
+                <a href="{{ route('libro.descargar', $dato->pk_libro) }}">
                     Descargar
-                </a> --}}
+                </a>
             </div>
-
-            @if($tipo_usuario == '1')
+            @if($tipo_usuario == 'Administrador')
                 <div class="acciones">
                     <div>
                         <a href="{{ route('libro.mostrar_por_id', $dato->pk_libro) }}">
@@ -148,6 +147,3 @@
     </script>
 
     @include('fooder')
-
-</body>
-</html>
