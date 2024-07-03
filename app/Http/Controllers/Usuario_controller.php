@@ -23,6 +23,7 @@ class Usuario_controller extends Controller
         if ($usuario && password_verify($credentials['contraseña'], $usuario->contraseña)) {
             if ($usuario->estatus_usuario == 1) {
                 session(['pk_usuario' => $usuario->pk_usuario, 'nombre_usuario' => $usuario->nombre_usuario]);
+                session(['pk_tipo_usuario' => $usuario->tipo_usuario->pk_tipo_usuario, 'nombre_tipo_usuario' => $usuario->tipo_usuario->nombre_tipo_usuario]);
                 return redirect('/')->with('success', 'Bienvenido');
             } else {
                 return redirect('/login')->with('error', 'Usuario no válido');
@@ -39,7 +40,7 @@ class Usuario_controller extends Controller
     }
 
     public function logout() {
-        session()->forget(['pk_usuario', 'nombre_usuario']);
+        session()->forget(['pk_usuario', 'nombre_usuario', 'pk_tipo_usuario', 'nombre_tipo_usuario']);
         return redirect('/login')->with('success', 'Sesión cerrada');
     }
 

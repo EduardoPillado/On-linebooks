@@ -53,9 +53,11 @@ Route::get('/libro', function () {
 Route::get('/agg_libro', [Libro_controller::class, 'libro_opciones'])->name('agg_libro');
 Route::post('/agregando_libro', [Libro_controller::class, 'insertar'])->name('libro.insertar');
 Route::get('/', [Libro_controller::class, 'mostrar'])->name('libro.mostrar');
+Route::get('/libro/leer/{pk_libro}', [Libro_controller::class, 'leer'])->name('libro.leer');
+Route::get('/libro/descargar/{pk_libro}', [Libro_controller::class, 'descargar'])->name('libro.descargar');
 Route::get('/libro/{pk_libro}/editar', [Libro_controller::class, 'mostrar_por_id'])->name('libro.mostrar_por_id');
 Route::put('/libro/{pk_libro}/actualizando', [Libro_controller::class, 'actualizar'])->name('libro.actualizar');
-Route::delete('/libro/{pk_libro}', [Libro_controller::class, 'baja'])->name('libro.baja');
+Route::match(['get', 'put'], '/libro/{pk_libro}', [Libro_controller::class, 'baja'])->name('libro.baja');
 
 // ------------------------------------------------------------------------------------------------------------
 

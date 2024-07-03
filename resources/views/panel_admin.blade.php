@@ -101,7 +101,7 @@
         </div>
         <div class="card-button-wrapper">
             <a href="your-panel-url" class="card-button secondary">Panel</a>
-            <a href="{{ route('form_libro') }}" class="card-button primary">Registrar</a>
+            <a href="{{ route('agg_libro') }}" class="card-button primary">Registrar</a>
         </div>
     </div>
 </div>
