@@ -36,12 +36,14 @@
     </div>
 
     <ul class="nav_list">
-      <li>
-        <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search here">
-        <span class="tooltip">Search</span>
-      </li>
 
+      <li>
+        <a href="{{ url('/') }}">
+          <i class='bx bxs-home'></i>
+          <span class="links_name">Inicio</span>
+        </a>
+        <span class="tooltip">Inicio</span>
+      </li>
       <li>
         <a href="{{ route('perfil') }}">
           <i class='bx bx-user-circle'></i>
@@ -67,19 +69,19 @@
       </li>
 
       <li>
-        <a href="#">
-          <i class='bx bxs-plane'></i>
-          <span class="links_name">Travel</span>
+        <a href="{{ route('categorias') }}">
+          <i class='bx bxs-category'></i>
+          <span class="links_name">Categorías</span>
         </a>
-        <span class="tooltip">Travel</span>
+        <span class="tooltip">Categorías</span>
       </li>
 
       <li>
-        <a href="#">
-          <i class='bx bx-fingerprint'></i>
-          <span class="links_name">Privacy</span>
+        <a href="{{ route('favoritos') }}">
+          <i class='bx bx-heart'></i>
+          <span class="links_name">Favoritos</span>
         </a>
-        <span class="tooltip">Privacy</span>
+        <span class="tooltip">Favoritos</span>
       </li>
 
       <li>

@@ -18,4 +18,8 @@ class Genero extends Model
     public function libros(){
         return $this->belongsToMany(Libro::class, 'libro_genero', 'fk_genero', 'fk_libro');
     }
+    public function libros()
+    {
+        return $this->belongsToMany(Libro::class, 'libro_genero', 'fk_genero', 'fk_libro');
+    }
 }
