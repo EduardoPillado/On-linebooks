@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usuario_controller;
+use App\Http\Controllers\Favorito_controller;
+use App\Models\Favorito;
 use App\Http\Controllers\Libro_controller;
 use App\Http\Controllers\Autor_controller;
 use App\Http\Controllers\Genero_controller;
@@ -21,7 +23,46 @@ Route::get('/perfil', function () {
 
 // ------------------------------------------------------------------------------------------------------------
 
+// Categorias -------------------------------------------------------------------------------------------------
+
+//ruta con la funcion del controlador de mostrar informacion, y el acceso de usuario en uno
+Route::get('/categorias', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return app(Genero_controller::class)->mostrar();
+    }
+})->name('categorias');
+
+Route::get('/libro_cat/{categoria}', [Libro_controller::class, 'mostrar'])->name('libro_cat');
+
+// ------------------------------------------------------------------------------------------------------------
+
+// Favoritos --------------------------------------------------------------------------------------------------
+
+Route::get('/favoritos', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return app(Favorito_controller::class)->mostrar();
+    }
+})->name('favoritos');
+
+Route::get('/favoritos', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return view('favoritos');
+    }
+})->name('favoritos');
+
+// ------------------------------------------------------------------------------------------------------------
+
 // Usuario ----------------------------------------------------------------------------------------------------
+
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
@@ -29,6 +70,15 @@ Route::get('/login', function () {
     }
     return view('login');
 })->name('login');
+
+Route::get('/perfil', function () {
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        return redirect()->back()->with('warning', 'Inicia sesion para acceder');
+    } else {
+        return view('perfil');
+    }
+})->name('perfil');
 
 Route::get('/registro', function () {
     $PK_USUARIO = session('pk_usuario');

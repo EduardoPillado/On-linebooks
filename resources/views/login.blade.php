@@ -7,11 +7,11 @@
             @csrf
             <div class="input-group">
             <label for="username">Nombre de usuario</label>
-            <input type="text" name="nombre_usuario" id="username" placeholder="">
+            <input autocomplete="off" type="text" name="nombre_usuario" id="username" placeholder="Ingresa tu nombre de usuario">
           </div>
           <div class="input-group">
             <label for="password">Contraseña</label>
-            <input type="password" name="contraseña" id="contraseña" placeholder="">
+            <input type="password" name="contraseña" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
           </div>
           <button class="sign">Registrate</button>
 
