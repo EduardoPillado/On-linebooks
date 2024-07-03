@@ -22,11 +22,11 @@ class Libro extends Model
     public function reseña(){
         return $this->hasMany(Reseña::class, 'fk_libro');
     }
-    public function libro_autor(){
-        return $this->hasMany(Libro_autor::class, 'fk_libro');
+    public function autores() {
+        return $this->belongsToMany(Autor::class, 'libro_autor', 'fk_libro', 'fk_autor');
     }
-    public function libro_genero(){
-        return $this->hasMany(Libro_genero::class, 'fk_libro');
+    public function generos(){
+        return $this->belongsToMany(Genero::class, 'libro_genero', 'fk_libro', 'fk_genero');
     }
     public function favorito(){
         return $this->hasMany(Favorito::class, 'fk_libro');

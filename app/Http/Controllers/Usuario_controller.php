@@ -46,7 +46,7 @@ class Usuario_controller extends Controller
     public function insertar(Request $req){
         $req->validate([
             'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
-            'correo' => ['required', 'regex:/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', 'email', 'max:255'],
+            'correo' => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'email', 'max:255'],
             'contraseña' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'min:8', 'max:255'],
         ], [
             'nombre_usuario.required' => 'El nombre de usuario es obligatorio.',
@@ -72,12 +72,13 @@ class Usuario_controller extends Controller
         $hash = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 10]);
         $usuario->contraseña=$hash;
         $usuario->fk_tipo_usuario=2;
-        $usuario->estatusUsuario=1;
+        $usuario->token = md5($usuario->correo);
+        $usuario->estatus_usuario=1;
 
         $usuario->save();
         
         if ($usuario->pk_usuario) {
-            return redirect('/')->with('success', 'Registro exitoso');
+            return redirect('/login')->with('success', 'Registro exitoso');
         } else {
             return back()->with('error', 'Hay algún problema con la información');
         }
