@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('genero', function (Blueprint $table) {
             $table->id('pk_genero')->autoIncrement();
             $table->string('nombre_genero');
+            $table->smallInteger('estatus_genero');
         });
     }
 

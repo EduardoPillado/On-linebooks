@@ -25,6 +25,7 @@ class Genero_controller extends Controller
 
         $genero = new Genero();
         $genero->nombre_genero = $req->nombre_genero;
+        $genero->estatus_genero = 1;
         $genero->save();
         
         if ($genero->pk_genero) {
@@ -36,7 +37,7 @@ class Genero_controller extends Controller
 
     public function mostrarGenero()
     {
-        $datos_genero = Genero::all();
+        $datos_genero = Genero::where('estatus_genero', '=', 1)->get();
         return view('tabla_generos', compact('datos_genero'));
     }
 
@@ -59,6 +60,7 @@ class Genero_controller extends Controller
         ]);
 
         $datosGenero->nombre_genero = $req->nombre_genero;
+        $datosGenero->estatus_genero = 1;
         $datosGenero->save();
 
         if ($datosGenero->pk_genero) {
@@ -68,11 +70,34 @@ class Genero_controller extends Controller
         }
     }
 
-    public function eliminar($pkGenero)
-    {
-        $genero = Genero::findOrFail($pkGenero);
-        $genero->delete();
+    public function baja($pk_genero){
+        $PK_USUARIO = session('pk_usuario');
+        if ($PK_USUARIO) {
+            $tipo_usuario = session('nombre_tipo_usuario');
+            if ($tipo_usuario == 'Administrador') {
+                $dato = Genero::findOrFail($pk_genero);
 
-        return redirect()->route('genero.mostrar')->with('success', 'Género eliminado correctamente.');
+                if ($dato) {
+                    $dato->estatus_genero = 0;
+                    $dato->save();
+
+                    return back()->with('success', 'Género dado de baja');
+                } else {
+                    return back()->with('error', 'Hay algún problema con la información');
+                }
+            } else {
+                return redirect('/')->with('warning', 'No puedes acceder');
+            }
+        } else {
+            return redirect('/login');
+        }
     }
+
+    // public function eliminar($pkGenero)
+    // {
+    //     $genero = Genero::findOrFail($pkGenero);
+    //     $genero->delete();
+
+    //     return redirect()->route('genero.mostrar')->with('success', 'Género eliminado correctamente.');
+    // }
 }

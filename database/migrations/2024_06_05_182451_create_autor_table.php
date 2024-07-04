@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('autor', function (Blueprint $table) {
             $table->id('pk_autor')->autoIncrement();
             $table->string('nombre_autor');
+            $table->smallInteger('estatus_autor');
         });
     }
 

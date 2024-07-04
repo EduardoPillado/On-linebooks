@@ -126,7 +126,8 @@ Route::get('/MostrarGenero', [Genero_controller::class, 'mostrarGenero'])->name(
 Route::post('/InsertarGenero', [Genero_controller::class, 'insertar'])->name('genero.insertar');
 Route::get('/genero/{pkGenero}/editar', [Genero_controller::class, 'mostrarFormularioEdicion'])->name('genero.mostrarFormularioEdicion');
 Route::put('/genero/{pkGenero}', [Genero_controller::class, 'actualizar'])->name('genero.actualizar');
-Route::delete('/genero/{pkGenero}', [Genero_controller::class, 'eliminar'])->name('genero.eliminar');
+Route::match(['get', 'put'], '/genero/{pk_genero}', [Genero_controller::class, 'baja'])->name('genero.baja');
+// Route::delete('/genero/{pkGenero}', [Genero_controller::class, 'eliminar'])->name('genero.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -146,6 +147,7 @@ Route::get('/tabla_autor', [Autor_controller::class, 'mostrarAutor'])->name('aut
 Route::post('/Insertarautor', [Autor_controller::class, 'insertar'])->name('autor.insertar');
 Route::get('/autor/{pkAutor}/editar', [Autor_controller::class, 'mostrarFormularioEdicion'])->name('autor.mostrarFormularioEdicion');
 Route::put('/autor/{pkAutor}', [Autor_controller::class, 'actualizar'])->name('autor.actualizar');
-Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
+Route::match(['get', 'put'], '/autor/{pk_autor}', [Autor_controller::class, 'baja'])->name('autor.baja');
+// Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------

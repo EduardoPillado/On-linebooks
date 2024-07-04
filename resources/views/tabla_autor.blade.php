@@ -18,11 +18,16 @@
                                 <form action="{{ route('autor.mostrarFormularioEdicion', $autor->pk_autor) }}" method="GET" style="display:inline;">
                                     <button type="submit" class="button2 btn-danger btn-sm">Editar</button>
                                 </form>
-                                <form action="{{ route('autor.eliminar', $autor->pk_autor) }}" method="POST" class="d-inline">
+                                <div class="d-inline">
+                                    <a class="button2 btn-danger btn-sm" href="{{ route('autor.baja', $autor->pk_autor) }}" onclick="confirmarBaja(event)">
+                                        Dar de baja
+                                    </a> 
+                                </div>
+                                {{-- <form action="{{ route('autor.baja', $autor->pk_autor) }}" method="POST" class="d-inline">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="button2 btn-danger btn-sm">Eliminar</button>
-                                </form>
+                                    @method('PUT')
+                                    <button type="submit" class="button2 btn-danger btn-sm">Dar de baja</button>
+                                </form> --}}
                             </div>
                         </td>
                     </tr>
@@ -31,5 +36,28 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function confirmarBaja(event) {
+        event.preventDefault();
+
+        const link = event.target.closest('a');
+
+        if (link) {
+            Swal.fire({
+                title: '¿Seguro?',
+                text: '¿Deseas dar de baja este autor?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, dar de baja',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link.href;
+                }
+            });
+        }
+    }
+</script>
 
 @include('fooder')
