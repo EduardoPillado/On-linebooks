@@ -27,8 +27,8 @@ class Libro_controller extends Controller
     }
 
     public function libro_opciones(){
-        $autores = Autor::all();
-        $generos = Genero::all();
+        $autores = Autor::where('estatus_autor', '=', 1)->get();
+        $generos = Genero::where('estatus_genero', '=', 1)->get();
         return view('form_libro', compact('autores', 'generos'));
     }
 
@@ -121,7 +121,7 @@ class Libro_controller extends Controller
                     return back()->with('error', 'Hay algún problema con la información');
                 }
             } else {
-                return redirect('/');
+                return redirect('/')->with('warning', 'No puedes acceder');
             }
         } else {
             return redirect('/login');
