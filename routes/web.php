@@ -55,7 +55,7 @@ Route::get('/login', function () {
 Route::get('/perfil', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        // return view('perfil');
+        return view('perfil');
         return redirect()->back()->with('warning', 'SECCIÓN EN DESARROLLO');
     } else {
         return redirect()->back()->with('warning', 'Inicia sesion para acceder');
@@ -74,6 +74,8 @@ Route::get('/registro', function () {
 Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('usuario.login');
 Route::get('/cerrandoSesión', [Usuario_controller::class, 'logout'])->name('usuario.logout');
 Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usuario.insertar');
+Route::get('/usuario/{pkUsuario}/editar', [Usuario_controller::class, 'mostrarFormularioEdicion'])->name('usuario.mostrarFormularioEdicion');
+Route::put('/usuario/{pkUsuario}', [Usuario_controller::class, 'actualizar'])->name('usuario.actualizar');
 
 // ------------------------------------------------------------------------------------------------------------
 

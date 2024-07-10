@@ -22,8 +22,15 @@ class Usuario_controller extends Controller
 
         if ($usuario && password_verify($credentials['contraseña'], $usuario->contraseña)) {
             if ($usuario->estatus_usuario == 1) {
-                session(['pk_usuario' => $usuario->pk_usuario, 'nombre_usuario' => $usuario->nombre_usuario]);
-                session(['pk_tipo_usuario' => $usuario->tipo_usuario->pk_tipo_usuario, 'nombre_tipo_usuario' => $usuario->tipo_usuario->nombre_tipo_usuario]);
+                session([
+                    'pk_usuario' => $usuario->pk_usuario, 
+                    'nombre_usuario' => $usuario->nombre_usuario,
+                    'correo_usuario' => $usuario->correo,  // Cambiar 'correo' a 'correo_usuario'
+                ]);
+                session([
+                    'pk_tipo_usuario' => $usuario->tipo_usuario->pk_tipo_usuario, 
+                    'nombre_tipo_usuario' => $usuario->tipo_usuario->nombre_tipo_usuario
+                ]);
                 return redirect('/')->with('success', 'Bienvenido');
             } else {
                 return redirect('/login')->with('error', 'Usuario no válido');
@@ -40,7 +47,7 @@ class Usuario_controller extends Controller
     }
 
     public function logout() {
-        session()->forget(['pk_usuario', 'nombre_usuario', 'pk_tipo_usuario', 'nombre_tipo_usuario']);
+        session()->forget(['pk_usuario', 'nombre_usuario', 'correo_usuario', 'pk_tipo_usuario', 'nombre_tipo_usuario']);
         return redirect('/login')->with('success', 'Sesión cerrada');
     }
 
@@ -84,4 +91,39 @@ class Usuario_controller extends Controller
             return back()->with('error', 'Hay algún problema con la información');
         }
     }
+
+    public function mostrarFormularioEdicion($pkUsuario)
+{
+    $datosUsuario = Usuario::findOrFail($pkUsuario);
+    return view('editar_usuario', compact('datosUsuario'));
 }
+
+public function actualizar(Request $req, $pkUsuario)
+{
+    $datosUsuario = Usuario::findOrFail($pkUsuario);
+
+    $req->validate([
+        'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+        'correo' => ['required', 'email', 'max:255', 'unique:usuario,correo,' . $pkUsuario . ',pk_usuario']
+    ], [
+        'nombre_usuario.required' => 'El nombre de usuario es obligatorio.',
+        'nombre_usuario.regex' => 'El nombre de usuario solo puede contener letras, números y espacios.',
+        'nombre_usuario.max' => 'El nombre de usuario no puede tener más de :max caracteres.',
+        'correo.required' => 'El correo electrónico es obligatorio.',
+        'correo.email' => 'El correo electrónico debe ser una dirección de correo válida.',
+        'correo.max' => 'El correo electrónico no puede tener más de :max caracteres.',
+        'correo.unique' => 'El correo electrónico ya está en uso.'
+    ]);
+
+    $datosUsuario->nombre_usuario = $req->nombre_usuario;
+    $datosUsuario->correo = $req->correo;
+    $datosUsuario->save();
+
+    return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
+}
+
+
+
+}
+
+?>
