@@ -13,12 +13,12 @@
 <div class="contenedor">
 <!-- muestra div por registro de categoria -->
 @foreach ($datos_genero as $dato)
+<a class="link-sin-subrayado" href="{{ route('libro_cat', $dato->nombre_genero) }}">
   <div class="card">
-    <a class="link-sin-subrayado" href="{{ route('libro_cat', $dato->nombre_genero) }}">
         <h2>{{ $dato->nombre_genero }}</h2>
         <span class="explore-text">Explorar</span>
-    </a>
   </div>
+</a>
 @endforeach
 </div>
 
