@@ -55,7 +55,7 @@ Route::get('/login', function () {
 Route::get('/perfil', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        return view('perfil');
+        // return view('perfil');
         return redirect()->back()->with('warning', 'SECCIÓN EN DESARROLLO');
     } else {
         return redirect()->back()->with('warning', 'Inicia sesion para acceder');
