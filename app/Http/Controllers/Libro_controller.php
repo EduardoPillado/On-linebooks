@@ -161,10 +161,10 @@ class Libro_controller extends Controller
               
                 return view('editar_libro', compact('datos_libro', 'autores', 'generos'));
             } else {
-                return redirect('/');
+                return redirect()->back()->with('warning', 'No puedes acceder');
             }
         } else {
-            return redirect('/');
+            return redirect()->back()->with('warning', 'No puedes acceder');
         }
     }
 

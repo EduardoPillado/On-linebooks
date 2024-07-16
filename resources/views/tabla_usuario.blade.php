@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('img/On-linebooks.ico') }}" rel="icon">
-    <title>On-linebooks | Géneros registrados</title>
+    <title>On-linebooks | Usuarios registrados</title>
 </head>
 <body>
 
@@ -15,30 +15,29 @@
     <table class="my-responsive-table">
         <thead>
             <tr>
-                <th class="my-table-header">Nombre de género</th>
+                <th class="my-table-header">Nombre de usuario</th>
+                <th class="my-table-header">Correo</th>
+                <th class="my-table-header">Acceso del usuario</th>
                 <th class="my-table-header">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @isset($datos_genero)
-                @foreach ($datos_genero as $genero)
+            @isset($datos_usuario)
+                @foreach ($datos_usuario as $usuario)
                     <tr>
-                        <td class="my-table-cell">{{ $genero->nombre_genero }}</td>
+                        <td class="my-table-cell">{{ $usuario->nombre_usuario }}</td>
+                        <td class="my-table-cell">{{ $usuario->correo }}</td>
+                        <td class="my-table-cell">{{ $usuario->tipo_usuario->nombre_tipo_usuario }}</td>
                         <td class="my-table-cell">
                             <div class="button-container">
-                                <form action="{{ route('genero.mostrarFormularioEdicion', $genero->pk_genero) }}" method="GET" style="display:inline;">
+                                <form action="{{ route('usuario.mostrarFormularioEdicion', $usuario->pk_usuario) }}" method="GET" style="display:inline;">
                                     <button type="submit" class="button2 btn-danger btn-sm">Editar</button>
                                 </form>
                                 <div class="d-inline">
-                                    <a class="button2 btn-danger btn-sm" href="{{ route('genero.baja', $genero->pk_genero) }}" onclick="confirmarBaja(event)">
+                                    <a class="button2 btn-danger btn-sm" href="{{ route('usuario.baja', $usuario->pk_usuario) }}" onclick="confirmarBaja(event)">
                                         Dar de baja
                                     </a> 
                                 </div>
-                                {{-- <form action="{{ route('genero.baja', $genero->pk_genero) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="button2 btn-danger btn-sm">Dar de baja</button>
-                                </form> --}}
                             </div>
                         </td>
                     </tr>
@@ -57,7 +56,7 @@
         if (link) {
             Swal.fire({
                 title: '¿Seguro?',
-                text: '¿Deseas dar de baja este género?',
+                text: '¿Deseas dar de baja este autor?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Sí, dar de baja',
