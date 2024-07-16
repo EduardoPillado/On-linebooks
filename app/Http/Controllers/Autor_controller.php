@@ -33,8 +33,18 @@ class Autor_controller extends Controller
 
     public function mostrarFormularioEdicion($pkAutor)
     {
-        $datosAutor = Autor::findOrFail($pkAutor);
-        return view('editar_autor', compact('datosAutor'));
+        $PK_USUARIO = session('pk_usuario');
+        if ($PK_USUARIO) {
+            $tipo_usuario = session('nombre_tipo_usuario');
+            if ($tipo_usuario == 'Administrador') {
+                $datosAutor = Autor::findOrFail($pkAutor);
+                return view('editar_autor', compact('datosAutor'));
+            } else {
+                return redirect()->back()->with('warning', 'No puedes acceder');
+            }
+        } else {
+            return redirect()->back()->with('warning', 'No puedes acceder');
+        }
     }
 
     public function actualizar(Request $req, $pkAutor)
@@ -78,12 +88,4 @@ class Autor_controller extends Controller
             return redirect('/login');
         }
     }
-
-    // public function eliminar($pkAutor)
-    // {
-    //     $autor = Autor::findOrFail($pkAutor);
-    //     $autor->delete();
-
-    //     return redirect()->route('autor.mostrar')->with('success', 'Autor eliminado correctamente.');
-    // }
 }
