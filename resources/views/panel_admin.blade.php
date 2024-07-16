@@ -1,4 +1,15 @@
-@include('sidebar')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ asset('img/On-linebooks.ico') }}" rel="icon">
+    <title>On-linebooks | Panel administrador</title>
+</head>
+<body>
+
+    @include('sidebar')
 
 <style>
     .container {
@@ -104,6 +115,19 @@
             <a href="{{ route('agg_libro') }}" class="card-button primary">Registrar</a>
         </div>
     </div>
+    <div class="card">
+        <div class="card-content">
+            <p class="card-heading">Usuarios</p>
+            <p class="card-description">Gestiona y agrega usuarios de On-linebooks</p>
+        </div>
+        <div class="card-button-wrapper">
+            <a href="{{ route('usuario.mostrar') }}" class="card-button secondary">Panel</a>
+            <a href="{{ route('registro_admin') }}" class="card-button primary">Registrar admin</a>
+        </div>
+    </div>
 </div>
 
 @include('fooder')
+    
+</body>
+</html>

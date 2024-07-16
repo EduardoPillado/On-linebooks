@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="{{ asset('img/On-linebooks.ico') }}" rel="icon">
-  <title>On-linebooks | Registro</title>
+  <title>On-linebooks | Registro de administrador</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
     
   <div class="form-container">
       <p class="title">Registro</p>
-      <form class="form" id="form-register" action="{{ route('usuario.insertar') }}" method="post">
+      <form class="form" id="form-register" action="{{ route('usuario.insertar_admin') }}" method="post">
           @csrf
           <div class="input-group">
           <label for="username">Nombre de usuario</label>
@@ -32,7 +32,7 @@
           <label for="password">Comfirmar contraseña</label>
           <input type="password" name="conf_contraseña" id="conf_contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
         </div>
-        <button class="sign">Registrate</button>
+        <button class="sign">Registrar administrador</button>
 
         @if($errors->any())
         @foreach($errors->all() as $error)
@@ -101,7 +101,6 @@
     </script>
 
       </form>
-      <p class="signup">¿Ya tienes una cuenta con nosotros?, <a href="{{ route('login') }}">inicia sesión aquí</a>.</p>
     </div>
 
     </body>
