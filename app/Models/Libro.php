@@ -37,4 +37,10 @@ class Libro extends Model
     public function historial_descarga(){
         return $this->hasMany(Historial_descarga::class, 'fk_libro');
     }
+    // En tu modelo Libro.php
+    public function esFavoritoDelUsuarioActual()
+    {
+        $usuarioActual = session()->get('pk_usuario');
+        return $this->favorito()->where('fk_usuario', $usuarioActual)->exists();
+    }
 }

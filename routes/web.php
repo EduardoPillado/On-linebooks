@@ -1,3 +1,4 @@
+<!-- web.php -->
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usuario_controller;
@@ -55,7 +56,8 @@ Route::get('/login', function () {
 Route::get('/perfil', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        return view('perfil');
+        // return view('perfil');
+        return redirect()->back()->with('warning', 'SECCIÓN EN DESARROLLO');
     } else {
         return redirect()->back()->with('warning', 'Inicia sesion para acceder');
     }
@@ -70,42 +72,9 @@ Route::get('/registro', function () {
     }
 })->name('registro');
 
-Route::get('/registro_admin', function () {
-    $PK_USUARIO = session('pk_usuario');
-    if ($PK_USUARIO) {
-        $tipo_usuario = session('nombre_tipo_usuario');
-        if ($tipo_usuario == 'Administrador') {
-            return view('registro_admin');
-        } else {
-            return redirect()->back()->with('warning', 'No puedes acceder');
-        }
-    } else {
-        return redirect()->back()->with('warning', 'No puedes acceder');
-    }
-})->name('registro_admin');
-
-Route::get('/tabla_usuario', function () {
-    $PK_USUARIO = session('pk_usuario');
-    if ($PK_USUARIO) {
-        $tipo_usuario = session('nombre_tipo_usuario');
-        if ($tipo_usuario == 'Administrador') {
-            return view('tabla_usuario');
-        } else {
-            return redirect()->back()->with('warning', 'No puedes acceder');
-        }
-    } else {
-        return redirect()->back()->with('warning', 'No puedes acceder');
-    }
-})->name('tabla_usuario');
-
 Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('usuario.login');
 Route::get('/cerrandoSesión', [Usuario_controller::class, 'logout'])->name('usuario.logout');
 Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usuario.insertar');
-Route::post('/registrando_admin', [Usuario_controller::class, 'insertar_admin'])->name('usuario.insertar_admin');
-Route::get('/tabla_usuario', [Usuario_controller::class, 'mostrarUsuario'])->name('usuario.mostrar');
-Route::get('/usuario/{pkUsuario}/editar', [Usuario_controller::class, 'mostrarFormularioEdicion'])->name('usuario.mostrarFormularioEdicion');
-Route::put('/usuario/{pkUsuario}', [Usuario_controller::class, 'actualizar'])->name('usuario.actualizar');
-Route::match(['get', 'put'], '/usuario/{pk_usuario}', [Usuario_controller::class, 'baja'])->name('usuario.baja');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -127,12 +96,7 @@ Route::match(['get', 'put'], '/libro/{pk_libro}', [Libro_controller::class, 'baj
 Route::get('/admin', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        $tipo_usuario = session('nombre_tipo_usuario');
-        if ($tipo_usuario == 'Administrador') {
-            return view('panel_admin');
-        } else {
-            return redirect()->back()->with('warning', 'No puedes acceder');
-        }
+        return view('panel_admin');
     } else {
         return redirect()->back()->with('warning', 'No puedes acceder');
     }
@@ -145,12 +109,7 @@ Route::get('/admin', function () {
 Route::get('/form_generos', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        $tipo_usuario = session('nombre_tipo_usuario');
-        if ($tipo_usuario == 'Administrador') {
-            return view('form_generos');
-        } else {
-            return redirect()->back()->with('warning', 'No puedes acceder');
-        }
+        return view('form_generos');
     } else {
         return redirect()->back()->with('warning', 'No puedes acceder');
     }
@@ -159,12 +118,7 @@ Route::get('/form_generos', function () {
 Route::get('/tabla_generos', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        $tipo_usuario = session('nombre_tipo_usuario');
-        if ($tipo_usuario == 'Administrador') {
-            return view('tabla_generos');
-        } else {
-            return redirect()->back()->with('warning', 'No puedes acceder');
-        }
+        return view('tabla_generos');
     } else {
         return redirect()->back()->with('warning', 'No puedes acceder');
     }
@@ -184,12 +138,7 @@ Route::match(['get', 'put'], '/genero/{pk_genero}', [Genero_controller::class, '
 Route::get('/form_autor', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
-        $tipo_usuario = session('nombre_tipo_usuario');
-        if ($tipo_usuario == 'Administrador') {
-            return view('form_autor');
-        } else {
-            return redirect()->back()->with('warning', 'No puedes acceder');
-        }
+        return view('form_autor');
     } else {
         return redirect()->back()->with('warning', 'No puedes acceder');
     }
@@ -204,3 +153,4 @@ Route::match(['get', 'put'], '/autor/{pk_autor}', [Autor_controller::class, 'baj
 // Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------
+// web.php
