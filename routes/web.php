@@ -1,4 +1,3 @@
-<!-- web.php -->
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usuario_controller;
@@ -75,6 +74,8 @@ Route::get('/registro', function () {
 Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('usuario.login');
 Route::get('/cerrandoSesión', [Usuario_controller::class, 'logout'])->name('usuario.logout');
 Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usuario.insertar');
+Route::get('/usuario/{pkUsuario}/editar', [Usuario_controller::class, 'mostrarFormularioEdicion'])->name('usuario.mostrarFormularioEdicion');
+Route::put('/usuario/{pkUsuario}', [Usuario_controller::class, 'actualizar'])->name('usuario.actualizar');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -153,4 +154,4 @@ Route::match(['get', 'put'], '/autor/{pk_autor}', [Autor_controller::class, 'baj
 // Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------
-// web.php
+
