@@ -1,9 +1,13 @@
+<!-- inicio.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Inicio</title>
     <style>
 
@@ -58,6 +62,32 @@
         .libro .acciones a:hover {
             color: #0056b3; /* Color del enlace al pasar el ratón */
         }
+        .btn-favorito {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .btn-favorito i {
+            color: #007bff; /* Puedes cambiar el color si lo deseas */
+            font-size: 24px; /* Ajusta el tamaño del icono */
+            transition: color 0.3s;
+        }
+
+        .btn-favorito:hover i {
+            color: #005A92; /* Cambia el color al pasar el cursor */
+        }
+
+        /* Estilo para el botón cuando está activo */
+        .btn-favorito.favorito-activo {
+            background-color: #007bff;
+        }
+
+        .btn-favorito.favorito-activo i {
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -104,18 +134,23 @@
                 <a href="{{ route('libro.descargar', $dato->pk_libro) }}">
                     Descargar
                 </a>
+                <!-- boton favorito -->
+                <a href="{{ route('favorito.like', $dato->pk_libro) }}" class="btn-favorito">
+                    <i class="bi bi-heart" title="Me gusta"></i>
+                </a>
+                <!-- boton favorito -->
             </div>
             @if($tipo_usuario == 'Administrador')
                 <div class="acciones">
                     <div>
                         <a href="{{ route('libro.mostrar_por_id', $dato->pk_libro) }}">
-                            <i class="bi bi-pencil-square" title="Editar datos"></i> Editar
+                            <i class="bi bi-pencil-square" title="Editar datos"></i>
                         </a>
                     </div>
 
                     <div>
                         <a href="{{ route('libro.baja', $dato->pk_libro) }}" onclick="confirmarBaja(event)">
-                            <i class="bi bi-lock" title="Dar de baja"></i> Dar de baja
+                            <i class="bi bi-lock" title="Dar de baja"></i>
                         </a>
                     </div>
                 </div>
@@ -147,3 +182,4 @@
     </script>
 
     @include('fooder')
+<!-- inicio.blade.php -->

@@ -1,3 +1,4 @@
+<!-- web.php -->
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usuario_controller;
@@ -11,7 +12,7 @@ Route::get('/', function () {
 })->name('inicio');
 
 // ------------------------------------------------------------------------------------------------------------
-
+Route::get('/favorito/{pk_libro}', [Favorito_controller::class, 'like'])->name('favorito.like');
 // Categorias -------------------------------------------------------------------------------------------------
 
 //ruta con la funcion del controlador de mostrar informacion, y el acceso de usuario en uno
@@ -152,3 +153,4 @@ Route::match(['get', 'put'], '/autor/{pk_autor}', [Autor_controller::class, 'baj
 // Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------
+// web.php
