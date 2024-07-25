@@ -14,22 +14,20 @@
 <h1>Categoría</h1>
 <div class="contenedor">
 
-@foreach ($datos_libro as $dato)
-<div class="book">
-    <ul>
-            <li>Descripción: {{ $dato->descripcion }}</li>
-            <li>Año de publicación: {{ $dato->año_publicacion }}</li>
-    </ul>
-
-    @foreach ($datos_libro as $dato)
-    <div class="cover">
-            <h2>{{ $dato->titulo }}</h2>
-    </div>
-    @endforeach
-
-</div>
-@endforeach
-</div>
+  @foreach ($datos_libro as $dato)
+  <div class="book">
+      <ul>
+              <li>Descripción: {{ $dato->descripcion }}</li>
+              <li>Año de publicación: {{ $dato->año_publicacion }}</li>
+      </ul>
+  
+      <div class="cover">
+              <h2>{{ $dato->titulo }}</h2>
+      </div>
+  
+  </div>
+  @endforeach
+  </div>
 
 <style type="text/css"> 
 .contenedor {
