@@ -8,6 +8,7 @@
 .my-table-container-large {
   width: 100%;
   margin: 20px auto;
+  font-size: 20px;
   overflow-x: auto;
 }
 
@@ -66,6 +67,8 @@
   background: #e8e8e8;
   border: 1px solid #e8e8e8;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  text-decoration: none; 
+  display: inline-block; 
 }
 
 .button2:active {

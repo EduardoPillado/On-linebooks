@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('fk_usuario');
             $table->unsignedBigInteger('fk_libro');
             $table->integer('valoracion');
-            $table->text('comentario')->autoIncrement();
+            $table->text('comentario');
             $table->date('fecha_reseña');
 
             $table->foreign('fk_usuario')

@@ -43,8 +43,18 @@ class Genero_controller extends Controller
 
     public function mostrarFormularioEdicion($pkGenero)
     {
-        $datosGenero = Genero::findOrFail($pkGenero);
-        return view('editar_genero', compact('datosGenero'));
+        $PK_USUARIO = session('pk_usuario');
+        if ($PK_USUARIO) {
+            $tipo_usuario = session('nombre_tipo_usuario');
+            if ($tipo_usuario == 'Administrador') {
+                $datosGenero = Genero::findOrFail($pkGenero);
+                return view('editar_genero', compact('datosGenero'));
+            } else {
+                return redirect()->back()->with('warning', 'No puedes acceder');
+            }
+        } else {
+            return redirect()->back()->with('warning', 'No puedes acceder');
+        }
     }
 
     public function actualizar(Request $req, $pkGenero)
