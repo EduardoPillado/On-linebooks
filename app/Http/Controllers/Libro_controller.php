@@ -12,7 +12,8 @@ class Libro_controller extends Controller
 {
     function mostrar_por_categoria($categoria){
         // Buscar el ID del género por su nombre
-        $genero = Genero::where('nombre_genero', $categoria)->first();
+        $genero = Genero::where('nombre_genero', $categoria)
+        ->first();
     
         if (!$genero) {
             abort(404); // Manejo de error si la categoría no existe
@@ -21,6 +22,7 @@ class Libro_controller extends Controller
         // Obtener los libros que pertenecen al género encontrado
         $datos_libro = $genero->libros()
                               ->select("libro.titulo", "libro.descripcion", "libro.año_publicacion")
+                              ->where('estatus_libro', 1)
                               ->get();
     
         return view("libro_cat", compact("datos_libro"));
@@ -35,7 +37,7 @@ class Libro_controller extends Controller
     public function insertar(Request $req) {
         $req->validate([
             'titulo' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
-            'descripcion' => ['required', 'max:1000'],
+            'descripcion' => ['max:200'],
             'autores' => ['required', 'array'],
             'autores.*' => ['exists:autor,pk_autor'],
             'generos' => ['required', 'array'],
@@ -48,7 +50,6 @@ class Libro_controller extends Controller
             'titulo.regex' => 'El título solo puede contener letras, números y espacios.',
             'titulo.max' => 'El título no puede tener más de :max caracteres.',
             
-            'descripcion.required' => 'La descripción es obligatoria.',
             'descripcion.max' => 'La descripción no puede tener más de :max caracteres.',
 
             'autores.required' => 'Debe seleccionar al menos un autor.',
