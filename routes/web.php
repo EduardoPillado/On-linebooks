@@ -11,7 +11,7 @@ Route::get('/', function () {
 })->name('inicio');
 
 // ------------------------------------------------------------------------------------------------------------
-
+Route::get('/favorito/{pk_libro}', [Favorito_controller::class, 'like'])->name('favorito.like');
 // Categorias -------------------------------------------------------------------------------------------------
 
 //ruta con la funcion del controlador de mostrar informacion, y el acceso de usuario en uno
@@ -101,6 +101,8 @@ Route::get('/tabla_usuario', function () {
 Route::post('/iniciandoSesión', [Usuario_controller::class, 'login'])->name('usuario.login');
 Route::get('/cerrandoSesión', [Usuario_controller::class, 'logout'])->name('usuario.logout');
 Route::post('/registrando', [Usuario_controller::class, 'insertar'])->name('usuario.insertar');
+Route::get('/usuario/{pkUsuario}/editar', [Usuario_controller::class, 'mostrarFormularioEdicion'])->name('usuario.mostrarFormularioEdicion');
+Route::put('/usuario/{pkUsuario}', [Usuario_controller::class, 'actualizar'])->name('usuario.actualizar');
 Route::post('/registrando_admin', [Usuario_controller::class, 'insertar_admin'])->name('usuario.insertar_admin');
 Route::get('/tabla_usuario', [Usuario_controller::class, 'mostrarUsuario'])->name('usuario.mostrar');
 Route::get('/usuario/{pkUsuario}/editar', [Usuario_controller::class, 'mostrarFormularioEdicion'])->name('usuario.mostrarFormularioEdicion');
@@ -204,3 +206,4 @@ Route::match(['get', 'put'], '/autor/{pk_autor}', [Autor_controller::class, 'baj
 // Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
 
 // ------------------------------------------------------------------------------------------------------------
+

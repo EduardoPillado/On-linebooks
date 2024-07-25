@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
     <link href="{{ asset('img/On-linebooks.ico') }}" rel="icon">
     <title>On-linebooks | Inicio</title>
 </head>
@@ -53,6 +54,13 @@
       <div class="card__button-container">
         <a href="{{ route('libro.leer', $dato->pk_libro) }}" target="_blank" class="card__button card__button__style">Leer</a>
         <a href="{{ route('libro.descargar', $dato->pk_libro) }}" class="card__button card__button__style">Descargar</a>
+        <a href="{{ route('favorito.like', $dato->pk_libro) }}" class="btn-favorito">
+            @if($dato->esFavoritoDelUsuarioActual())
+                <i class="bi bi-heart-fill" title="Me gusta"></i>
+            @else
+                <i class="bi bi-heart" title="Me gusta"></i>
+            @endif
+        </a>
       </div>
       @if($tipo_usuario == 'Administrador')
     <div class="card__button-container">
