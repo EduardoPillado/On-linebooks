@@ -11,7 +11,7 @@
 
     @include('sidebar')
 
-<div class="my-table-container">
+<div class="my-table-container-large">
     <table class="my-responsive-table">
         <thead>
             <tr>
