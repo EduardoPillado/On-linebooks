@@ -154,7 +154,7 @@ class Usuario_controller extends Controller
     }
 
     public function mostrarFormularioEdicion($pkUsuario)
-    {
+{
         $PK_USUARIO = session('pk_usuario');
         if ($PK_USUARIO) {
             $datosUsuario = Usuario::findOrFail($pkUsuario);
@@ -162,7 +162,8 @@ class Usuario_controller extends Controller
         } else {
             return redirect()->back()->with('warning', 'No puedes acceder');
         }
-    }
+}
+
 
     public function actualizar(Request $req, $pkUsuario)
     {
@@ -212,6 +213,39 @@ class Usuario_controller extends Controller
             return redirect('/login');
         }
     }
+
+    public function mostrarUsuariosDadosDeBaja()
+{
+    $datos_usuario = Usuario::where('estatus_usuario', '=', 0)->get();
+    return view('tabla_usuario_baja', compact('datos_usuario'));
+}
+
+
+
+
+    public function darDeAlta($pk_usuario)
+{
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        $tipo_usuario = session('nombre_tipo_usuario');
+        if ($tipo_usuario == 'Administrador') {
+            $usuario = Usuario::findOrFail($pk_usuario);
+
+            if ($usuario) {
+                $usuario->estatus_usuario = 1; // Cambia el estatus a 1 para dar de alta
+                $usuario->save();
+
+                return back()->with('success', 'Autor restaurado con éxito.');
+            } else {
+                return back()->with('error', 'Autor no encontrado.');
+            }
+        } else {
+            return redirect('/')->with('warning', 'No tienes permisos para realizar esta acción.');
+        }
+    } else {
+        return redirect('/login');
+    }
+}
 
 
 

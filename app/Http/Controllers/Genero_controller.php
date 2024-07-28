@@ -107,6 +107,40 @@ class Genero_controller extends Controller
         }
     }
 
+    public function mostrarGenerosDadosDeBaja()
+{
+    $datos_genero = Genero::where('estatus_genero', '=', 0)->get();
+    return view('tabla_generos_baja', compact('datos_genero'));
+}
+
+public function darDeAlta($pk_genero, Request $request)
+{
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        $tipo_usuario = session('nombre_tipo_usuario');
+        if ($tipo_usuario == 'Administrador') {
+            $dato = Genero::findOrFail($pk_genero);
+
+            if ($dato) {
+                $dato->estatus_genero = 1;
+                $dato->save();
+
+                return redirect()->route('genero.dadosDeBaja')->with('success', 'Género dado de alta');
+            } else {
+                return redirect()->route('genero.dadosDeBaja')->with('error', 'Hay algún problema con la información');
+            }
+        } else {
+            return redirect('/')->with('warning', 'No puedes acceder');
+        }
+    } else {
+        return redirect('/login');
+    }
+}
+
+
+
+
+
     // public function eliminar($pkGenero)
     // {
     //     $genero = Genero::findOrFail($pkGenero);

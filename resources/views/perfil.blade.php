@@ -163,7 +163,6 @@
 }
 </style>
 
-@include('fooder')
   
 </body>
 </html>

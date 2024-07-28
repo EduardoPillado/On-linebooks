@@ -20,6 +20,18 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="button-container">
+                        <a class="button2 btn-danger btn-sm" href="{{ route('genero.dadosDeBaja') }}">
+                            Géneros dados de baja
+                        </a>
+                        <a class="button2 btn-danger btn-sm" href="{{ route('form_generos') }}">
+                            Crear nuevo género
+                        </a>
+                    </div>
+                </td>
+            </tr>
             @isset($datos_genero)
                 @foreach ($datos_genero as $genero)
                     <tr>
@@ -34,11 +46,6 @@
                                         Dar de baja
                                     </a> 
                                 </div>
-                                {{-- <form action="{{ route('genero.baja', $genero->pk_genero) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="button2 btn-danger btn-sm">Dar de baja</button>
-                                </form> --}}
                             </div>
                         </td>
                     </tr>
@@ -72,6 +79,6 @@
 </script>
 
 @include('fooder')
-    
+
 </body>
 </html>
