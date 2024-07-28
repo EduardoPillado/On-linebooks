@@ -13,21 +13,19 @@
 
 <h1>Favoritos</h1>
 <div class="contenedor">
-
-@foreach ($datos_libro as $dato)
-<div class="book">
-    <ul>
-            <li>Descripción: {{ $dato->descripcion }}</li>
-            <li>Año de publicación: {{ $dato->año_publicacion }}</li>
-    </ul>
-
+  @foreach ($datos_libro as $dato)
+  <a href="{{ route('libro.leer', $dato->pk_libro) }}" target="_blank" class="book">
     <div class="cover">
-            <h2>{{ $dato->titulo }}</h2>
+      <h2>{{ $dato->titulo }}</h2>
     </div>
+    <ul>
+      <li>Descripción: {{ $dato->descripcion }}</li>
+      <li>Año de publicación: {{ $dato->año_publicacion }}</li>
+    </ul>
+  </a>
+  @endforeach
+</div>
 
-</div>
-@endforeach
-</div>
 
 <style type="text/css"> 
 .contenedor {
@@ -43,7 +41,8 @@
   position: relative;
   border-radius: 10px;
   width: 220px;
-  height: 300px;
+  text-decoration: none;
+  height: 350px;
   margin: 10px; /* Espacio entre elementos */
   background-color: whitesmoke;
   -webkit-box-shadow: 1px 1px 12px lightgrey;

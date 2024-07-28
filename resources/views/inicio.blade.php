@@ -49,7 +49,7 @@
             @foreach($dato->generos as $genero)
                 {{ $loop->first ? '' : ', ' }}{{ $genero->nombre_genero }}
             @endforeach
-        </p>
+        </p> 
       </div>
       <div class="card__button-container">
         <a href="{{ route('libro.leer', $dato->pk_libro) }}" target="_blank" class="card__button card__button__style">Leer</a>

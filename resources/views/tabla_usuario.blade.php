@@ -22,6 +22,18 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td colspan="4">
+                        <div class="button-container">
+                            <a class="button2 btn-warning btn-sm" href="{{ route('usuario.dadosDeBaja') }}">
+                                Usuarios dados de baja
+                            </a>
+                            <a class="button2 btn-warning btn-sm" href="{{ route('usuario.insertar') }}">
+                                Crear nuevo usuario
+                            </a>
+                        </div>
+                    </td>
+                </tr>     
                 @isset($datos_usuario)
                     @foreach ($datos_usuario as $usuario)
                         <tr>

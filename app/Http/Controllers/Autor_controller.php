@@ -88,4 +88,36 @@ class Autor_controller extends Controller
             return redirect('/login');
         }
     }
+
+    public function mostrarAutoresDadosDeBaja()
+    {
+        $datos_autor = Autor::where('estatus_autor', '=', 0)->get();
+        return view('tabla_autor_baja', compact('datos_autor'));
+    }
+
+    public function darDeAlta($pk_autor)
+{
+    $PK_USUARIO = session('pk_usuario');
+    if ($PK_USUARIO) {
+        $tipo_usuario = session('nombre_tipo_usuario');
+        if ($tipo_usuario == 'Administrador') {
+            $autor = Autor::findOrFail($pk_autor);
+
+            if ($autor) {
+                $autor->estatus_autor = 1; // Cambia el estatus a 1 para dar de alta
+                $autor->save();
+
+                return back()->with('success', 'Autor restaurado con éxito.');
+            } else {
+                return back()->with('error', 'Autor no encontrado.');
+            }
+        } else {
+            return redirect('/')->with('warning', 'No tienes permisos para realizar esta acción.');
+        }
+    } else {
+        return redirect('/login');
+    }
+}
+
+
 }

@@ -9,9 +9,9 @@
 </head>
 <body>
 
-    @include('sidebar')
+@include('sidebar')
 
-<div class="my-table-container">
+<div class="my-table-container">    
     <table class="my-responsive-table">
         <thead>
             <tr>
@@ -20,6 +20,18 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="button-container">
+                        <a class="button2 btn-warning btn-sm" href="{{ route('autor.dadosDeBaja') }}">
+                            Autores dados de baja
+                        </a>
+                        <a class="button2 btn-warning btn-sm" href="{{ route('form_autor') }}">
+                            Crear nuevo autor
+                        </a>
+                    </div>
+                </td>
+            </tr>         
             @isset($datos_autor)
                 @foreach ($datos_autor as $autor)
                     <tr>
@@ -72,6 +84,6 @@
 </script>
 
 @include('fooder')
-    
+
 </body>
 </html>
