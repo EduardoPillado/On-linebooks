@@ -108,14 +108,17 @@ Route::get('/tabla_usuario', [Usuario_controller::class, 'mostrarUsuario'])->nam
 Route::get('/usuario/{pkUsuario}/editar', [Usuario_controller::class, 'mostrarFormularioEdicion'])->name('usuario.mostrarFormularioEdicion');
 Route::put('/usuario/{pkUsuario}', [Usuario_controller::class, 'actualizar'])->name('usuario.actualizar');
 Route::match(['get', 'put'], '/usuario/{pk_usuario}', [Usuario_controller::class, 'baja'])->name('usuario.baja');
+Route::get('/usuario/dados-de-baja', [Usuario_controller::class, 'mostrarUsuariosDadosDeBaja'])->name('usuario.dadosDeBaja');
+Route::post('/usuario/dar-de-alta/{pk_usuario}', [Usuario_controller::class, 'darDeAlta'])->name('usuario.darDeAlta');
 
 // ------------------------------------------------------------------------------------------------------------
-
+ 
 // Libro ------------------------------------------------------------------------------------------------------
 
 Route::get('/agg_libro', [Libro_controller::class, 'libro_opciones'])->name('agg_libro');
 Route::post('/agregando_libro', [Libro_controller::class, 'insertar'])->name('libro.insertar');
 Route::get('/', [Libro_controller::class, 'mostrar'])->name('libro.mostrar');
+
 Route::get('/libro/leer/{pk_libro}', [Libro_controller::class, 'leer'])->name('libro.leer');
 Route::get('/libro/descargar/{pk_libro}', [Libro_controller::class, 'descargar'])->name('libro.descargar');
 Route::get('/libro/{pk_libro}/editar', [Libro_controller::class, 'mostrar_por_id'])->name('libro.mostrar_por_id');
@@ -178,6 +181,8 @@ Route::get('/genero/{pkGenero}/editar', [Genero_controller::class, 'mostrarFormu
 Route::put('/genero/{pkGenero}', [Genero_controller::class, 'actualizar'])->name('genero.actualizar');
 Route::match(['get', 'put'], '/genero/{pk_genero}', [Genero_controller::class, 'baja'])->name('genero.baja');
 // Route::delete('/genero/{pkGenero}', [Genero_controller::class, 'eliminar'])->name('genero.eliminar');
+Route::get('/generos/dados-de-baja', [Genero_controller::class, 'mostrarGenerosDadosDeBaja'])->name('genero.dadosDeBaja');
+Route::post('/genero/dar-de-alta/{pk_genero}', [Genero_controller::class, 'darDeAlta'])->name('genero.darDeAlta');
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -204,6 +209,8 @@ Route::get('/autor/{pkAutor}/editar', [Autor_controller::class, 'mostrarFormular
 Route::put('/autor/{pkAutor}', [Autor_controller::class, 'actualizar'])->name('autor.actualizar');
 Route::match(['get', 'put'], '/autor/{pk_autor}', [Autor_controller::class, 'baja'])->name('autor.baja');
 // Route::delete('/autor/{pkAutor}', [Autor_controller::class, 'eliminar'])->name('autor.eliminar');
+Route::get('/autores_dados_de_baja', [Autor_controller::class, 'mostrarAutoresDadosDeBaja'])->name('autor.dadosDeBaja');
+Route::post('/autor/{pk_autor}/dar-de-alta', [Autor_controller::class, 'darDeAlta'])->name('autor.darDeAlta');
 
 // ------------------------------------------------------------------------------------------------------------
 
