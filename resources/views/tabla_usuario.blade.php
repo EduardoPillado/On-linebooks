@@ -11,66 +11,66 @@
 
     @include('sidebar')
 
-<div class="my-table-container-large">
-    <table class="my-responsive-table">
-        <thead>
-            <tr>
-                <th class="my-table-header">Nombre de usuario</th>
-                <th class="my-table-header">Correo</th>
-                <th class="my-table-header">Acceso del usuario</th>
-                <th class="my-table-header">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @isset($datos_usuario)
-                @foreach ($datos_usuario as $usuario)
-                    <tr>
-                        <td class="my-table-cell">{{ $usuario->nombre_usuario }}</td>
-                        <td class="my-table-cell">{{ $usuario->correo }}</td>
-                        <td class="my-table-cell">{{ $usuario->tipo_usuario->nombre_tipo_usuario }}</td>
-                        <td class="my-table-cell">
-                            <div class="button-container">
-                                <form action="{{ route('usuario.mostrarFormularioEdicion', $usuario->pk_usuario) }}" method="GET" style="display:inline;">
-                                    <button type="submit" class="button2 btn-danger btn-sm">Editar</button>
-                                </form>
-                                <div class="d-inline">
-                                    <a class="button2 btn-danger btn-sm" href="{{ route('usuario.baja', $usuario->pk_usuario) }}" onclick="confirmarBaja(event)">
-                                        Dar de baja
-                                    </a> 
+    <div class="my-table-container-large">
+        <table class="my-responsive-table">
+            <thead>
+                <tr>
+                    <th class="my-table-header">Nombre de usuario</th>
+                    <th class="my-table-header">Correo</th>
+                    <th class="my-table-header">Acceso del usuario</th>
+                    <th class="my-table-header">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @isset($datos_usuario)
+                    @foreach ($datos_usuario as $usuario)
+                        <tr>
+                            <td class="my-table-cell">{{ $usuario->nombre_usuario }}</td>
+                            <td class="my-table-cell">{{ $usuario->correo }}</td>
+                            <td class="my-table-cell">{{ $usuario->tipo_usuario->nombre_tipo_usuario }}</td>
+                            <td class="my-table-cell">
+                                <div class="button-container">
+                                    <form action="{{ route('usuario.mostrarFormularioEdicion', $usuario->pk_usuario) }}" method="GET" style="display:inline;">
+                                        <button type="submit" class="button2 btn-danger btn-sm">Editar</button>
+                                    </form>
+                                    <div class="d-inline">
+                                        <a class="button2 btn-danger btn-sm" href="{{ route('usuario.baja', $usuario->pk_usuario) }}" onclick="confirmarBaja(event)">
+                                            Dar de baja
+                                        </a> 
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            @endisset
-        </tbody>
-    </table>
-</div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endisset
+            </tbody>
+        </table>
+    </div>
 
-<script>
-    function confirmarBaja(event) {
-        event.preventDefault();
+    <script>
+        function confirmarBaja(event) {
+            event.preventDefault();
 
-        const link = event.target.closest('a');
+            const link = event.target.closest('a');
 
-        if (link) {
-            Swal.fire({
-                title: '¿Seguro?',
-                text: '¿Deseas dar de baja este autor?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, dar de baja',
-                cancelButtonText: 'Cancelar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = link.href;
-                }
-            });
+            if (link) {
+                Swal.fire({
+                    title: '¿Seguro?',
+                    text: '¿Deseas dar de baja este autor?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, dar de baja',
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link.href;
+                    }
+                });
+            }
         }
-    }
-</script>
+    </script>
 
-@include('fooder')
+    @include('fooder')
     
 </body>
 </html>

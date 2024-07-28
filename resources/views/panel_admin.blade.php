@@ -118,7 +118,7 @@
     <div class="card">
         <div class="card-content">
             <p class="card-heading">Usuarios</p>
-            <p class="card-description">Gestiona y agrega usuarios de On-linebooks</p>
+            <p class="card-description">Gestiona y agrega usuarios admin de On-linebooks</p>
         </div>
         <div class="card-button-wrapper">
             <a href="{{ route('usuario.mostrar') }}" class="card-button secondary">Panel</a>

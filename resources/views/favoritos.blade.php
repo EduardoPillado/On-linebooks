@@ -21,11 +21,9 @@
             <li>Año de publicación: {{ $dato->año_publicacion }}</li>
     </ul>
 
-    @foreach ($datos_libro as $dato)
     <div class="cover">
             <h2>{{ $dato->titulo }}</h2>
     </div>
-    @endforeach
 
 </div>
 @endforeach
