@@ -56,7 +56,7 @@
         <a href="{{ route('libro.descargar', $dato->pk_libro) }}" class="card__button card__button__style">Descargar</a>
         <a href="{{ route('favorito.like', $dato->pk_libro) }}" class="btn-favorito">
             @if($dato->esFavoritoDelUsuarioActual())
-                <i class="bi bi-heart-fill" title="Me gusta"></i>
+                <i class="bi bi-heart-fill" title="No me gusta"></i>
             @else
                 <i class="bi bi-heart" title="Me gusta"></i>
             @endif

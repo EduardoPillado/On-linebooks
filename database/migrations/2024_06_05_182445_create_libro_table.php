@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('pk_libro')->autoIncrement();
             $table->string('titulo');
             $table->text('descripcion')->nullable();
-            $table->year('año_publicacion')->nullable();
+            $table->integer('año_publicacion', 4)->nullable();
             $table->text('imagen_portada')->nullable();
             $table->string('pdf_ruta');
             $table->smallInteger('estatus_libro');

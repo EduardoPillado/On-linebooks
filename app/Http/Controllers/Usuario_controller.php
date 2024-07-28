@@ -53,18 +53,20 @@ class Usuario_controller extends Controller
 
     public function insertar(Request $req){
         $req->validate([
-            'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
-            'correo' => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'email', 'max:255'],
+            'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:usuario,nombre_usuario'],
+            'correo' => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'email', 'max:255', 'unique:usuario,correo'],
             'contraseña' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'min:8', 'max:255'],
         ], [
             'nombre_usuario.required' => 'El nombre de usuario es obligatorio.',
             'nombre_usuario.regex' => 'El nombre de usuario solo puede contener letras, números y espacios.',
             'nombre_usuario.max' => 'El nombre de usuario no puede tener más de :max caracteres.',
+            'nombre_usuario.unique' => 'El nombre de usuario ya está en uso.',
     
             'correo.required' => 'El correo electrónico es obligatorio.',
             'correo.regex' => 'El correo electrónico no tiene un formato válido.',
             'correo.email' => 'El correo electrónico debe ser una dirección de correo válida.',
             'correo.max' => 'El correo electrónico no puede tener más de :max caracteres.',
+            'correo.unique' => 'El correo electrónico ya está en uso.',
     
             'contraseña.required' => 'La contraseña es obligatoria.',
             'contraseña.regex' => 'La contraseña solo puede contener letras, números y espacios.',
@@ -94,18 +96,20 @@ class Usuario_controller extends Controller
 
     public function insertar_admin(Request $req){
         $req->validate([
-            'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
-            'correo' => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'email', 'max:255'],
+            'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:usuario,nombre_usuario'],
+            'correo' => ['required', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'email', 'max:255', 'unique:usuario,correo'],
             'contraseña' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'min:8', 'max:255'],
         ], [
             'nombre_usuario.required' => 'El nombre de usuario es obligatorio.',
             'nombre_usuario.regex' => 'El nombre de usuario solo puede contener letras, números y espacios.',
             'nombre_usuario.max' => 'El nombre de usuario no puede tener más de :max caracteres.',
+            'nombre_usuario.unique' => 'El nombre de usuario ya está en uso.',
     
             'correo.required' => 'El correo electrónico es obligatorio.',
             'correo.regex' => 'El correo electrónico no tiene un formato válido.',
             'correo.email' => 'El correo electrónico debe ser una dirección de correo válida.',
             'correo.max' => 'El correo electrónico no puede tener más de :max caracteres.',
+            'correo.unique' => 'El correo electrónico ya está en uso.',
     
             'contraseña.required' => 'La contraseña es obligatoria.',
             'contraseña.regex' => 'La contraseña solo puede contener letras, números y espacios.',
@@ -152,16 +156,12 @@ class Usuario_controller extends Controller
     public function mostrarFormularioEdicion($pkUsuario)
 {
         $PK_USUARIO = session('pk_usuario');
-    
-    // Verifica si el identificador del usuario está disponible en la sesión
-    if ($PK_USUARIO) {
-        // Busca el usuario por el ID proporcionado
-        $datosUsuario = Usuario::findOrFail($pkUsuario);
-        
-        return view('editar_usuario', compact('datosUsuario'));
-    } else {
-        return redirect()->back()->with('warning', 'No puedes acceder');
-    }
+        if ($PK_USUARIO) {
+            $datosUsuario = Usuario::findOrFail($pkUsuario);
+            return view('editar_usuario', compact('datosUsuario'));
+        } else {
+            return redirect()->back()->with('warning', 'No puedes acceder');
+        }
 }
 
 
@@ -170,12 +170,14 @@ class Usuario_controller extends Controller
         $datosUsuario = Usuario::findOrFail($pkUsuario);
 
         $req->validate([
-            'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+            'nombre_usuario' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:usuario,nombre_usuario'],
             'correo' => ['required', 'email', 'max:255', 'unique:usuario,correo,' . $pkUsuario . ',pk_usuario']
         ], [
             'nombre_usuario.required' => 'El nombre de usuario es obligatorio.',
             'nombre_usuario.regex' => 'El nombre de usuario solo puede contener letras, números y espacios.',
             'nombre_usuario.max' => 'El nombre de usuario no puede tener más de :max caracteres.',
+            'nombre_usuario.unique' => 'El nombre de usuario ya está en uso.',
+            
             'correo.required' => 'El correo electrónico es obligatorio.',
             'correo.email' => 'El correo electrónico debe ser una dirección de correo válida.',
             'correo.max' => 'El correo electrónico no puede tener más de :max caracteres.',

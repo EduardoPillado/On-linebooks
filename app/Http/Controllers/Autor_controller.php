@@ -10,11 +10,12 @@ class Autor_controller extends Controller
     public function insertar(Request $req)
     {
         $req->validate([
-            'nombre_autor' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+            'nombre_autor' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:autor,nombre_autor'],
         ], [
             'nombre_autor.required' => 'El nombre del autor es obligatorio.',
             'nombre_autor.regex' => 'El nombre del autor solo puede contener letras, números y espacios.',
             'nombre_autor.max' => 'El nombre del autor no puede tener más de :max caracteres.',
+            'nombre_autor.unique' => 'El nombre del autor ya existe.',
         ]);
 
         $autor = new Autor();
@@ -52,11 +53,12 @@ class Autor_controller extends Controller
         $datosAutor = Autor::findOrFail($pkAutor);
 
         $req->validate([
-            'nombre_autor' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+            'nombre_autor' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:autor,nombre_autor'],
         ], [
             'nombre_autor.required' => 'El nombre del autor es obligatorio.',
             'nombre_autor.regex' => 'El nombre del autor solo puede contener letras, números y espacios.',
             'nombre_autor.max' => 'El nombre del autor no puede tener más de :max caracteres.',
+            'nombre_autor.unique' => 'El nombre del autor ya existe.',
         ]);
 
         $datosAutor->nombre_autor = $req->nombre_autor;

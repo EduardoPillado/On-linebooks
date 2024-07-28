@@ -36,7 +36,7 @@ class Libro_controller extends Controller
 
     public function insertar(Request $req) {
         $req->validate([
-            'titulo' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+            'titulo' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:libro,titulo'],
             'descripcion' => ['max:200'],
             'autores' => ['required', 'array'],
             'autores.*' => ['exists:autor,pk_autor'],
@@ -49,6 +49,7 @@ class Libro_controller extends Controller
             'titulo.required' => 'El título es obligatorio.',
             'titulo.regex' => 'El título solo puede contener letras, números y espacios.',
             'titulo.max' => 'El título no puede tener más de :max caracteres.',
+            'titulo.unique' => 'El título ya existe.',
             
             'descripcion.max' => 'La descripción no puede tener más de :max caracteres.',
 
@@ -171,6 +172,42 @@ class Libro_controller extends Controller
 
     public function actualizar(Request $req, $pk_libro) {
         $datos_libro = Libro::findOrFail($pk_libro);
+
+        $req->validate([
+            'titulo' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:libro,titulo'],
+            'descripcion' => ['max:200'],
+            'autores' => ['required', 'array'],
+            'autores.*' => ['exists:autor,pk_autor'],
+            'generos' => ['required', 'array'],
+            'generos.*' => ['exists:genero,pk_genero'],
+            'año_publicacion' => ['required', 'digits:4', 'integer', 'min:1000', 'max:' . date('Y')],
+            'imagen_portada' => ['nullable', 'image'],
+            'pdf_ruta' => ['required', 'mimes:pdf'],
+        ], [
+            'titulo.required' => 'El título es obligatorio.',
+            'titulo.regex' => 'El título solo puede contener letras, números y espacios.',
+            'titulo.max' => 'El título no puede tener más de :max caracteres.',
+            'titulo.unique' => 'El título ya existe.',
+            
+            'descripcion.max' => 'La descripción no puede tener más de :max caracteres.',
+
+            'autores.required' => 'Debe seleccionar al menos un autor.',
+            'autores.*.exists' => 'El autor seleccionado no es válido.',
+
+            'generos.required' => 'Debe seleccionar al menos un género.',
+            'generos.*.exists' => 'El género seleccionado no es válido.',
+            
+            'año_publicacion.required' => 'El año de publicación es obligatorio.',
+            'año_publicacion.digits' => 'El año de publicación debe tener 4 dígitos.',
+            'año_publicacion.integer' => 'El año de publicación debe ser un número entero.',
+            'año_publicacion.min' => 'El año de publicación debe ser un año válido.',
+            'año_publicacion.max' => 'El año de publicación no puede ser mayor al año actual.',
+            
+            'imagen_portada.image' => 'La portada debe ser una imagen válida.',
+            
+            'pdf_ruta.required' => 'El PDF del libro es obligatorio.',
+            'pdf_ruta.mimes' => 'El libro debe ser un archivo con formato PDF.',
+        ]);
         
         $datos_libro->titulo = $req->titulo;
         $datos_libro->descripcion = $req->descripcion;
