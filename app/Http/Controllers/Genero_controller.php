@@ -18,11 +18,12 @@ class Genero_controller extends Controller
     public function insertar(Request $req)
     {
         $req->validate([
-            'nombre_genero' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+            'nombre_genero' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:genero,nombre_genero'],
         ], [
             'nombre_genero.required' => 'El nombre del género es obligatorio.',
             'nombre_genero.regex' => 'El nombre del género solo puede contener letras, números y espacios.',
             'nombre_genero.max' => 'El nombre del género no puede tener más de :max caracteres.',
+            'nombre_genero.unique' => 'El nombre del género ya existe.',
         ]);
 
         $genero = new Genero();
@@ -64,11 +65,12 @@ class Genero_controller extends Controller
         $datosGenero = Genero::findOrFail($pkGenero);
 
         $req->validate([
-            'nombre_genero' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255'],
+            'nombre_genero' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+$/', 'max:255', 'unique:genero,nombre_genero'],
         ], [
             'nombre_genero.required' => 'El nombre del género es obligatorio.',
             'nombre_genero.regex' => 'El nombre del género solo puede contener letras, números y espacios.',
             'nombre_genero.max' => 'El nombre del género no puede tener más de :max caracteres.',
+            'nombre_genero.unique' => 'El nombre del género ya existe.',
         ]);
 
         $datosGenero->nombre_genero = $req->nombre_genero;
